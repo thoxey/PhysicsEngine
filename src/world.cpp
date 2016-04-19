@@ -83,13 +83,12 @@ void World::collisionDetection(std::vector<GameObject*> _list)
   {
     for(int j = i+1; j < _list.size(); ++j)
     {
-      double sumOfSquares = sqrt(pow((_list[i]->m_posX - _list[j]->m_posX), 2)+pow((_list[i]->m_posY - _list[j]->m_posY), 2));
-      float massRatA = _list[j]->m_mass/(_list[i]->m_mass*_list[j]->m_mass);
-      if(_list[i]->m_radius*2 > sumOfSquares)
+      double dX = _list[i]->m_posX - _list[j]->m_posX;
+      double dY = _list[i]->m_posY - _list[j]->m_posY;
+      double sumOfSquares = sqrt(dX*dX + dY*dY);
+      if(_list[i]->m_radius*2 > sumOfSquares && _list[j]->m_isColliding == false)
       {
           _list[j]->m_isColliding = true;
-          _list[j]->m_velY += (_list[j]->m_posY-_list[i]->m_posY)*massRatA;
-          _list[j]->m_velX += (_list[j]->m_posX - _list[i]->m_posX)*massRatA;
           break;
       }
       else
@@ -115,10 +114,14 @@ void World::calcVelY()
   {
     i->m_velY -= i->m_g;
     if(i->m_isColliding)
+    {
         i->m_velY *= i->m_bounce;
+        i->m_isColliding = false;
+    }
     if(i->m_posY >= 0.9 || i->m_posY <= -0.9f)
     {
       i->m_velY *= i->m_bounce;
+      i->m_isColliding = false;
     }
   }
 }
@@ -134,6 +137,8 @@ void World::updateObjects(std::vector<GameObject*> _list)
   {
     if(i->m_isDynamic)
     {
+      i->m_oldPosY = i->m_posY;
+      i->m_oldPosX = i->m_posX;
       i->m_posY += i->m_velY*m_elapsedTime;
       i->m_posX += i->m_velX*m_elapsedTime;
     }

@@ -24,6 +24,8 @@ public:
   void initGameObject();
   double m_posY = 0;
   double m_posX = 0;
+  double m_oldPosY = 0;
+  double m_oldPosX = 0;
   double m_velX    = 0.0;
   double m_velY    = 0.0;
   float m_bounce = -0.5f;
