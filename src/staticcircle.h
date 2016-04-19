@@ -8,7 +8,7 @@ class StaticCircle : public GameObject
 public:
   StaticCircle(float _posX, float _posY);
 
-  void draw();
+  void draw(bool _xray);
   void detectCollision();
   float updateX(float _posX);
   float updateY(float _posY);

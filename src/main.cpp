@@ -7,18 +7,13 @@
 #include "staticsquare.h"
 #include "staticcircle.h"
 // Change this if you want something different.
-#define WINDOW_TITLE "Being outsmarted by a circle"
-#define TESTSHAPE DynamicCircle
+#define WINDOW_TITLE "Being outsmarted by a whole bunch of circles"
 // These defines are for the initial window size (it can be changed in the resize function)
 #define WIDTH 800
 #define HEIGHT 800
 
-#define STARTPOS 0.0f
-
 // Our scene, which will store all the GL stuff
 World *scene = NULL;
-TESTSHAPE *testShape = NULL;
-StaticSquare *square = NULL;
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -78,9 +73,6 @@ int main() {
     // We should now be ready to use OpenGL
     // This object holds our scene. It needs to be initialised before it can be drawn.
     scene = new World();
-    square = new StaticSquare(0,0);
-    testShape = new TESTSHAPE(0,0);
-    testShape->m_posY = STARTPOS;
     // Initialise the scene
     scene->init();
     // Need an initial resize to make sure the projection matrix is initialised
@@ -123,6 +115,17 @@ int main() {
               case SDLK_ESCAPE : quit=1; break;
               case SDLK_x :
               {
+                  if(scene->m_xray)
+                  {
+                    scene->m_xray = false;
+                  }
+                  else
+                  {
+                    scene->m_xray = true;
+                  }
+              };break;
+              case SDLK_v :
+              {
                   int x , y;
                   SDL_GetMouseState( &x, &y );
                   newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y));
@@ -135,7 +138,7 @@ int main() {
                   newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y));
                   scene->masterList.push_back(newShape);
                };break;
-              case SDLK_v :
+              case SDLK_b :
               {
                   int x , y;
                   SDL_GetMouseState( &x, &y );
@@ -150,7 +153,7 @@ int main() {
         scene->updateObjects(scene->masterList);
         for(auto& i : scene->masterList)
         {
-            i->draw();
+            i->draw(scene->m_xray);
         }
         //Update screen
         SDL_GL_SwapWindow( gWindow );

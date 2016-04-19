@@ -43,6 +43,8 @@ public:
 
     void updateObjects(std::vector<GameObject *> _list);
 
+    bool m_xray = true;
+
 private: // Protected means that it is accessible to derived classes
     /// Keep track of whether this has been initialised - otherwise it won't be ready to draw!
     bool m_isInit;

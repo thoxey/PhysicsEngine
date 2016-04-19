@@ -3,7 +3,7 @@ GameObject::GameObject()
 {
     //m_mass = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 }
-void GameObject::draw()
+void GameObject::draw(bool _xray)
 {
 
 }

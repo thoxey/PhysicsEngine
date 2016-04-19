@@ -6,7 +6,7 @@ class StaticSquare : public GameObject
 {
 public:
   StaticSquare(float _posX, float _posY);
-  void draw();
+  void draw(bool _xray);
 };
 
 #endif // STATICSQUARE_H

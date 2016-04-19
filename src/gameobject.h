@@ -19,7 +19,7 @@ class GameObject
 {
 public:
   GameObject();
-  virtual void draw();
+  virtual void draw(bool _xray);
   void detectCollision();
   void initGameObject();
   double m_posY = 0;
@@ -28,7 +28,7 @@ public:
   double m_oldPosX = 0;
   double m_velX    = 0.0;
   double m_velY    = 0.0;
-  float m_bounce = -0.5f;
+  float m_bounce = -0.6f;
   float m_radius  = 0.1f;
   float m_mass    = 1.0f;
   bool m_isColliding = false;
