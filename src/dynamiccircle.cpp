@@ -18,7 +18,7 @@ void DynamicCircle::draw(bool _xray)
     if(_xray)
     {
         glBegin(GL_TRIANGLE_FAN); //Solid
-        glColor3f(0.2f, m_mass, 0.5f);
+        glColor3f(1.0f-m_mass, m_mass, 1.0f);
         glVertex2f(m_posX, m_posY);
         for(int i = 0; i <= points;i++)
         {

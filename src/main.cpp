@@ -149,8 +149,9 @@ int main() {
           }
         }
         //Render the scene
+
         scene->draw();
-        scene->updateObjects(scene->masterList);
+        scene->updateObjects();
         for(auto& i : scene->masterList)
         {
             i->draw(scene->m_xray);

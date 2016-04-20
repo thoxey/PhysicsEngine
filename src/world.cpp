@@ -3,6 +3,7 @@
 // Use this to keep track of the times
 #include <sys/time.h>
 
+#define DAMPNER 50
 /**
  * @brief World::World
  */
@@ -63,36 +64,45 @@ void World::draw() {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 }
-void World::collisionDetection(std::vector<GameObject*> _list)
+void World::collisionDetection()
 {
 
-  for(int i = 0; i < _list.size(); ++i)
+  for(int i = 0; i < masterList.size(); ++i)
   {
-    for(int j = i+1; j < _list.size(); ++j)
+    for(int j = i+1; j < masterList.size(); ++j)
     {
-      double dX = _list[i]->m_posX - _list[j]->m_posX;
-      double dY = _list[i]->m_posY - _list[j]->m_posY;
+      double dX = masterList[i]->m_posX - masterList[j]->m_posX;
+      double dY = masterList[i]->m_posY - masterList[j]->m_posY;
       double sumOfSquares = sqrt(dX*dX + dY*dY);
-      double massRatI = _list[j]->m_mass*(_list[i]->m_mass/_list[j]->m_mass);
-      double massRatJ = _list[i]->m_mass*(_list[j]->m_mass/_list[i]->m_mass);
-      if(_list[i]->m_radius*2 > sumOfSquares)
+      double massRatI = 1; //masterList[j]->m_mass*(masterList[i]->m_mass/masterList[j]->m_mass);
+      double massRatJ = 1; //masterList[i]->m_mass*(masterList[j]->m_mass/masterList[i]->m_mass);
+      if(masterList[i]->m_radius*2 > sumOfSquares)
       {
-          _list[i]->m_isColliding = true;
-          _list[i]->m_velX += dX*-50;//*massRatI;
-          _list[i]->m_velX *= _list[j]->m_bounce;
-          _list[i]->m_velY += dY*-50;//*massRatI;
-          _list[i]->m_velY *= _list[j]->m_bounce;
-
-          _list[j]->m_isColliding = true;
-          _list[j]->m_velX += dX*50;//*massRatJ;
-          _list[j]->m_velX *= _list[j]->m_bounce;
-          _list[j]->m_velY += dY*50;//*massRatJ;
-          _list[j]->m_velY *= _list[j]->m_bounce;
+          if(masterList[i]->m_isDynamic)
+          {
+              masterList[i]->m_isColliding = true;
+              masterList[i]->m_posX += dX/DAMPNER;
+              masterList[i]->m_velX -= dX*massRatI;
+              masterList[i]->m_velX *= masterList[j]->m_bounce;
+              masterList[i]->m_posY += dY/DAMPNER;
+              masterList[i]->m_velY -= dY*massRatI;
+              masterList[i]->m_velY *= masterList[j]->m_bounce;
+           }
+          if(masterList[j]->m_isDynamic)
+          {
+              masterList[j]->m_isColliding = true;
+              masterList[j]->m_velX += dX*massRatJ;
+              masterList[j]->m_posX -= dX/DAMPNER;
+              masterList[j]->m_velX *= masterList[j]->m_bounce;
+              masterList[j]->m_posY -= dY/DAMPNER;
+              masterList[j]->m_velY += dY*massRatJ;
+              masterList[j]->m_velY *= masterList[j]->m_bounce;
+          }
           break;
       }
       else
       {
-          _list[j]->m_isColliding = false;
+          masterList[j]->m_isColliding = false;
       }
     }
   }
@@ -117,12 +127,6 @@ void World::calcVelY()
 {
   for(auto& i : masterList)
   {
-//    if(i->m_isColliding)
-//    {
-//        double resY = i->m_velY * i->m_bounce;
-//        i->m_velY *= resY;
-//        i->m_isColliding = false;
-//    }
     if(i->m_posY > 0.9)
     {
         i->m_posY = 0.9;
@@ -139,22 +143,22 @@ void World::calcVelY()
     }
   }
 }
-void World::updateObjects(std::vector<GameObject*> _list)
+void World::updateObjects()
 {
   m_startTime += 0.001;
   calcVelX();
   calcVelY();
-  collisionDetection(_list);
+  collisionDetection();
   m_elapsedTime = m_startTime;
   m_startTime = 0;
-  for(auto& i : _list)
+  for(auto& i : masterList)
   {
     if(i->m_isDynamic)
     {
       i->m_oldPosY = i->m_posY;
       i->m_oldPosX = i->m_posX;
-      i->m_posY += i->m_velY*m_elapsedTime*0.5;
-      i->m_posX += i->m_velX*m_elapsedTime*0.5;
+      i->m_posY += i->m_velY*m_elapsedTime;
+      i->m_posX += i->m_velX*m_elapsedTime;
     }
   }
 }

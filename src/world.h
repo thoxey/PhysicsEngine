@@ -41,7 +41,7 @@ public:
 
     std::vector<GameObject*> masterList;
 
-    void updateObjects(std::vector<GameObject *> _list);
+    void updateObjects();
 
     bool m_xray = true;
 
@@ -55,7 +55,7 @@ private: // Protected means that it is accessible to derived classes
     /// A member that is updated when update() is called indicating the elapsed time
     double m_elapsedTime;
 
-    void collisionDetection(std::vector<GameObject *> _list);
+    void collisionDetection();
 
     void calcVelX();
 
