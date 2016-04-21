@@ -56,7 +56,13 @@ int initSDL()
     }
     return EXIT_SUCCESS;
 }
-
+Uint32 timerCallback(Uint32 interval, void *) {
+    if (scene != NULL)
+    {
+      scene->updateObjects();
+    }
+    return interval;
+}
 int main() {
     //Start up SDL and create window
     if( initSDL() == EXIT_FAILURE ) return EXIT_FAILURE;
@@ -78,6 +84,9 @@ int main() {
     // Need an initial resize to make sure the projection matrix is initialised
     scene->resize(WIDTH, HEIGHT);
 
+    SDL_TimerID timerID = SDL_AddTimer(10, /*elapsed time in milliseconds*/
+                                         timerCallback, /*callback function*/
+                                         (void*) NULL /*parameters (none)*/);
 
     //Main loop flag
     bool quit = false;
@@ -151,7 +160,7 @@ int main() {
         //Render the scene
 
         scene->draw();
-        scene->updateObjects();
+        //scene->updateObjects();
         for(auto& i : scene->masterList)
         {
             i->draw(scene->m_xray);
@@ -162,6 +171,9 @@ int main() {
 
     //Disable text input
     SDL_StopTextInput();
+
+    // Disable our timer
+    SDL_RemoveTimer(timerID);
 
     // Delete our scene
     delete scene;

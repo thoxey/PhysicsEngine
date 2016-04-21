@@ -78,25 +78,28 @@ void World::collisionDetection()
       double massRatJ = 1; //masterList[i]->m_mass*(masterList[j]->m_mass/masterList[i]->m_mass);
       if(masterList[i]->m_radius*2 > sumOfSquares)
       {
-          if(masterList[i]->m_isDynamic)
-          {
-              masterList[i]->m_isColliding = true;
-              masterList[i]->m_posX += dX/DAMPNER;
-              masterList[i]->m_velX -= dX*massRatI;
-              masterList[i]->m_velX *= masterList[j]->m_bounce;
-              masterList[i]->m_posY += dY/DAMPNER;
-              masterList[i]->m_velY -= dY*massRatI;
-              masterList[i]->m_velY *= masterList[j]->m_bounce;
-           }
+        double hyp = (2*masterList[i]->m_radius)-sumOfSquares;
+        if(masterList[i]->m_isDynamic)
+        {
+            masterList[i]->m_isColliding = true;
+            double alpha = asin(dY/sumOfSquares);
+            masterList[i]->m_posX += hyp*cos(alpha) * (dX > 0 ? 0.1 : -0.1);
+            masterList[i]->m_velX += dX*massRatI;
+            masterList[i]->m_velX += masterList[j]->m_bounce*dX;
+            masterList[i]->m_posY += hyp*sin(alpha);
+            masterList[i]->m_velY += dY*massRatI;
+            masterList[i]->m_velY += masterList[j]->m_bounce*dY;
+          }
           if(masterList[j]->m_isDynamic)
           {
               masterList[j]->m_isColliding = true;
-              masterList[j]->m_velX += dX*massRatJ;
-              masterList[j]->m_posX -= dX/DAMPNER;
-              masterList[j]->m_velX *= masterList[j]->m_bounce;
-              masterList[j]->m_posY -= dY/DAMPNER;
-              masterList[j]->m_velY += dY*massRatJ;
-              masterList[j]->m_velY *= masterList[j]->m_bounce;
+              double alpha = asin(dY/sumOfSquares);
+              masterList[j]->m_velX -= dX*massRatJ;
+              masterList[j]->m_posX -= hyp*cos(alpha) * (dX > 0 ? 0.1 : -0.1);
+              masterList[j]->m_velX -= masterList[j]->m_bounce*dX;
+              masterList[j]->m_posY -= hyp*sin(alpha);
+              masterList[j]->m_velY -= dY*massRatJ;
+              masterList[j]->m_velY -= masterList[j]->m_bounce*dY;
           }
           break;
       }
@@ -157,8 +160,8 @@ void World::updateObjects()
     {
       i->m_oldPosY = i->m_posY;
       i->m_oldPosX = i->m_posX;
-      i->m_posY += i->m_velY*m_elapsedTime;
-      i->m_posX += i->m_velX*m_elapsedTime;
+      i->m_posY += i->m_velY*m_elapsedTime*0.2;
+      i->m_posX += i->m_velX*m_elapsedTime*0.2;
     }
   }
 }

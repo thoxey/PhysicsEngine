@@ -16,6 +16,7 @@
 #include <GL/glut.h>
 #endif
 #include <vector>
+#include <cmath>
 #include "gameobject.h"
 /**
  * @brief The Scene class
