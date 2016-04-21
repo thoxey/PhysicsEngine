@@ -140,7 +140,7 @@ void World::calcVelY()
         i->m_posY = -0.9;
         i->m_velY *= i->m_bounce;
     }
-    else
+    if(m_gravOn)
     {
         i->m_velY -= i->m_g;
     }

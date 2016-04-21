@@ -122,6 +122,17 @@ int main() {
               {
               // if we have an escape quit
               case SDLK_ESCAPE : quit=1; break;
+              case SDLK_z :
+              {
+                  if(scene->m_gravOn)
+                  {
+                    scene->m_gravOn = false;
+                  }
+                  else
+                  {
+                    scene->m_gravOn = true;
+                  }
+              };break;
               case SDLK_x :
               {
                   if(scene->m_xray)

@@ -45,6 +45,7 @@ public:
     void updateObjects();
 
     bool m_xray = true;
+    bool m_gravOn = true;
 
 private: // Protected means that it is accessible to derived classes
     /// Keep track of whether this has been initialised - otherwise it won't be ready to draw!
