@@ -42,10 +42,14 @@ public:
 
     std::vector<GameObject*> masterList;
 
-    void updateObjects();
-
     bool m_xray = true;
     bool m_gravOn = true;
+
+    int m_calcs = 5;
+
+    void updateObjectsPos();
+
+    void updateObjectsVel();
 
 private: // Protected means that it is accessible to derived classes
     /// Keep track of whether this has been initialised - otherwise it won't be ready to draw!
@@ -62,6 +66,9 @@ private: // Protected means that it is accessible to derived classes
     void calcVelX();
 
     void calcVelY();
+
+    void reaction(int _i, double _hyp, double _massRat, double _dX, double _dY);
+
 
 };
 

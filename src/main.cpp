@@ -4,6 +4,7 @@
 #include "gameobject.h"
 #include "dynamicobject.h"
 #include "dynamiccircle.h"
+#include "dynamicsquare.h"
 #include "staticsquare.h"
 #include "staticcircle.h"
 // Change this if you want something different.
@@ -37,10 +38,10 @@ int initSDL()
     {
         //Use OpenGL 3.1 core
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
-                SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
-                SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
-                SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-                SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+        SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
+        SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+        SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
         //Create window
         gWindow = SDL_CreateWindow( WINDOW_TITLE,
                                     SDL_WINDOWPOS_UNDEFINED,
@@ -59,7 +60,12 @@ int initSDL()
 Uint32 timerCallback(Uint32 interval, void *) {
     if (scene != NULL)
     {
-      scene->updateObjects();
+        for(int i = 0;i < scene->m_calcs; ++i)
+        {
+            scene->updateObjectsVel();
+        }
+        scene->updateObjectsPos();
+
     }
     return interval;
 }
@@ -85,8 +91,8 @@ int main() {
     scene->resize(WIDTH, HEIGHT);
 
     SDL_TimerID timerID = SDL_AddTimer(10, /*elapsed time in milliseconds*/
-                                         timerCallback, /*callback function*/
-                                         (void*) NULL /*parameters (none)*/);
+                                       timerCallback, /*callback function*/
+                                       (void*) NULL /*parameters (none)*/);
 
     //Main loop flag
     bool quit = false;
@@ -117,56 +123,56 @@ int main() {
             }
             else if(e.type == SDL_KEYDOWN)
             {
-              GameObject *newShape;
-              switch (e.key.keysym.sym)
-              {
-              // if we have an escape quit
-              case SDLK_ESCAPE : quit=1; break;
-              case SDLK_z :
-              {
-                  if(scene->m_gravOn)
-                  {
-                    scene->m_gravOn = false;
-                  }
-                  else
-                  {
-                    scene->m_gravOn = true;
-                  }
-              };break;
-              case SDLK_x :
-              {
-                  if(scene->m_xray)
-                  {
-                    scene->m_xray = false;
-                  }
-                  else
-                  {
-                    scene->m_xray = true;
-                  }
-              };break;
-              case SDLK_v :
-              {
-                  int x , y;
-                  SDL_GetMouseState( &x, &y );
-                  newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y));
-                  scene->masterList.push_back(newShape);
-              };break;
-              case SDLK_c :
-              {
-                  int x , y;
-                  SDL_GetMouseState( &x, &y );
-                  newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y));
-                  scene->masterList.push_back(newShape);
-               };break;
-              case SDLK_b :
-              {
-                  int x , y;
-                  SDL_GetMouseState( &x, &y );
-                  newShape = new StaticSquare(convertPixCoorX(x), convertPixCoorY(y));
-                  scene->masterList.push_back(newShape);
-              }
+                GameObject *newShape;
+                switch (e.key.keysym.sym)
+                {
+                // if we have an escape quit
+                case SDLK_ESCAPE : quit=1; break;
+                case SDLK_z :
+                {
+                    if(scene->m_gravOn)
+                    {
+                        scene->m_gravOn = false;
+                    }
+                    else
+                    {
+                        scene->m_gravOn = true;
+                    }
+                };break;
+                case SDLK_x :
+                {
+                    if(scene->m_xray)
+                    {
+                        scene->m_xray = false;
+                    }
+                    else
+                    {
+                        scene->m_xray = true;
+                    }
+                };break;
+                case SDLK_v :
+                {
+                    int x , y;
+                    SDL_GetMouseState( &x, &y );
+                    newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y));
+                    scene->masterList.push_back(newShape);
+                };break;
+                case SDLK_c :
+                {
+                    int x , y;
+                    SDL_GetMouseState( &x, &y );
+                    newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y));
+                    scene->masterList.push_back(newShape);
+                };break;
+                case SDLK_b :
+                {
+                    int x , y;
+                    SDL_GetMouseState( &x, &y );
+                    newShape = new DynamicSquare(convertPixCoorX(x), convertPixCoorY(y));
+                    scene->masterList.push_back(newShape);
+                }
+                }
             }
-          }
         }
         //Render the scene
 

@@ -24,7 +24,8 @@ SOURCES += src/main.cpp \
     src/staticcircle.cpp \
     src/dynamicobject.cpp \
     src/dynamiccircle.cpp \
-    src/staticsquare.cpp
+    src/staticsquare.cpp \
+    src/dynamicsquare.cpp
 
 HEADERS += \
     src/world.h \
@@ -32,4 +33,5 @@ HEADERS += \
     src/staticcircle.h \
     src/dynamicobject.h \
     src/dynamiccircle.h \
-    src/staticsquare.h
+    src/staticsquare.h \
+    src/dynamicsquare.h

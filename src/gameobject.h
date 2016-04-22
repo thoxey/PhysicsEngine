@@ -33,6 +33,7 @@ public:
   float m_mass    = 1.0f;
   bool m_isColliding = false;
   bool m_isDynamic = false;
+  bool m_isCircle = true;
   void initDeltaTime();
   void setDeltaTime();
   //bool minkowski(std::list<float>_listX1, std::list<float>_listY1,std::list<float>_listX2, std::list<float>_listY2);

@@ -3,7 +3,8 @@
 // Use this to keep track of the times
 #include <sys/time.h>
 
-#define DAMPNER 50
+#define DAMPNER 45
+#define BOUND 0.9
 /**
  * @brief World::World
  */
@@ -64,104 +65,126 @@ void World::draw() {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 }
+/// @brief World::collisionDetection detects whether two objects are colliding, then calls the reaction if they are
 void World::collisionDetection()
 {
 
-  for(int i = 0; i < masterList.size(); ++i)
-  {
-    for(int j = i+1; j < masterList.size(); ++j)
+    for(int i = 0; i < masterList.size(); ++i)
     {
-      double dX = masterList[i]->m_posX - masterList[j]->m_posX;
-      double dY = masterList[i]->m_posY - masterList[j]->m_posY;
-      double sumOfSquares = sqrt(dX*dX + dY*dY);
-      double massRatI = 1; //masterList[j]->m_mass*(masterList[i]->m_mass/masterList[j]->m_mass);
-      double massRatJ = 1; //masterList[i]->m_mass*(masterList[j]->m_mass/masterList[i]->m_mass);
-      if(masterList[i]->m_radius*2 > sumOfSquares)
-      {
-        double hyp = (2*masterList[i]->m_radius)-sumOfSquares;
-        if(masterList[i]->m_isDynamic)
+        for(int j = i+1; j < masterList.size(); ++j)
         {
-            masterList[i]->m_isColliding = true;
-            double alpha = asin(dY/sumOfSquares);
-            masterList[i]->m_posX += hyp*cos(alpha) * (dX > 0 ? 0.1 : -0.1);
-            masterList[i]->m_velX += dX*massRatI;
-            masterList[i]->m_velX += masterList[j]->m_bounce*dX;
-            masterList[i]->m_posY += hyp*sin(alpha);
-            masterList[i]->m_velY += dY*massRatI;
-            masterList[i]->m_velY += masterList[j]->m_bounce*dY;
-          }
-          if(masterList[j]->m_isDynamic)
-          {
-              masterList[j]->m_isColliding = true;
-              double alpha = asin(dY/sumOfSquares);
-              masterList[j]->m_velX -= dX*massRatJ;
-              masterList[j]->m_posX -= hyp*cos(alpha) * (dX > 0 ? 0.1 : -0.1);
-              masterList[j]->m_velX -= masterList[j]->m_bounce*dX;
-              masterList[j]->m_posY -= hyp*sin(alpha);
-              masterList[j]->m_velY -= dY*massRatJ;
-              masterList[j]->m_velY -= masterList[j]->m_bounce*dY;
-          }
-          break;
-      }
-      else
-      {
-          masterList[j]->m_isColliding = false;
-      }
+            //Difference in x&y
+            double dX = masterList[i]->m_posX - masterList[j]->m_posX;
+            double dY = masterList[i]->m_posY - masterList[j]->m_posY;
+            double sumOfRads = masterList[i]->m_radius + masterList[j]->m_radius;
+            double massRatI = masterList[j]->m_mass*(masterList[i]->m_mass/masterList[j]->m_mass);
+            double massRatJ = masterList[i]->m_mass*(masterList[j]->m_mass/masterList[i]->m_mass);
+            if(masterList[i]->m_isCircle == true && masterList[j]->m_isCircle == true)
+            {
+                double sumOfSquares = sqrt(dX*dX + dY*dY);
+                double hyp = sumOfRads-sumOfSquares;
+                if(sumOfRads > sumOfSquares)
+                {
+                    if(masterList[i]->m_isDynamic)
+                    {
+                        reaction(i, hyp, massRatI, dX, dY);
+                    }
+                    if(masterList[j]->m_isDynamic)
+                    {
+                        reaction(j, hyp, massRatJ, -dX, -dY);
+                    }
+                    break;
+                }
+            }
+            else if((masterList[i]->m_isCircle == true  && masterList[j]->m_isCircle == false)||
+                    (masterList[i]->m_isCircle == false && masterList[j]->m_isCircle == true)||
+                    (masterList[i]->m_isCircle == false && masterList[j]->m_isCircle == false)&&
+                    (dX>sumOfRads && dY>sumOfRads))
+            {
+                double hyp = 1; //((sumOfRads-dX)+(sumOfRads-dY))/2;
+                std::cout<<"squares colliding"<<std::endl;
+                if(masterList[i]->m_isDynamic)
+                {
+                    reaction(i, hyp, massRatI, dX, dY);
+                }
+                if(masterList[j]->m_isDynamic)
+                {
+                    reaction(j, hyp, massRatJ, -dX, -dY);
+                }
+                break;
+
+            }
+            else
+            {
+                masterList[j]->m_isColliding == false;
+            }
+        }
     }
-  }
 }
+void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _dY)
+{
+    masterList[_i]->m_isColliding = true;
+    masterList[_i]->m_posX += _dX/DAMPNER;
+    masterList[_i]->m_velX *= _hyp*_massRat*masterList[_i]->m_bounce;
+    masterList[_i]->m_posY += _dY/DAMPNER;
+    masterList[_i]->m_velY *= _hyp*_massRat*masterList[_i]->m_bounce;
+}
+
 void World::calcVelX()
 {
-  for(auto& i : masterList)
-  {
-      if(i->m_posX > 0.9)
-      {
-          i->m_posX = 0.9;
-          i->m_velX *= i->m_bounce;
-      }
-      else if(i->m_posX < -0.9f)
-      {
-          i->m_posX = -0.9;
-          i->m_velX *= i->m_bounce;
-      }
-  }
+    for(auto& i : masterList)
+    {
+        if(i->m_posX > 1-i->m_radius)
+        {
+            i->m_posX = 1-i->m_radius;
+            i->m_velX *= i->m_bounce;
+        }
+        else if(i->m_posX < -1+i->m_radius)
+        {
+            i->m_posX = -1+i->m_radius;
+            i->m_velX *= i->m_bounce;
+        }
+    }
 }
 void World::calcVelY()
 {
-  for(auto& i : masterList)
-  {
-    if(i->m_posY > 0.9)
+    for(auto& i : masterList)
     {
-        i->m_posY = 0.9;
-        i->m_velY *= i->m_bounce;
+        if(i->m_posY > 1-i->m_radius)
+        {
+            i->m_posY = 1-i->m_radius;
+            i->m_velY *= i->m_bounce;
+        }
+        else if(i->m_posY < -1+i->m_radius)
+        {
+            i->m_posY = -1+i->m_radius;
+            i->m_velY *= i->m_bounce;
+        }
+        if(m_gravOn)
+        {
+            i->m_velY -= i->m_g/5;
+        }
     }
-    else if(i->m_posY < -0.9f)
-    {
-        i->m_posY = -0.9;
-        i->m_velY *= i->m_bounce;
-    }
-    if(m_gravOn)
-    {
-        i->m_velY -= i->m_g;
-    }
-  }
 }
-void World::updateObjects()
+void World::updateObjectsVel()
 {
-  m_startTime += 0.001;
-  calcVelX();
-  calcVelY();
-  collisionDetection();
-  m_elapsedTime = m_startTime;
-  m_startTime = 0;
-  for(auto& i : masterList)
-  {
-    if(i->m_isDynamic)
+    m_startTime += 0.001;
+    calcVelX();
+    calcVelY();
+    collisionDetection();
+    m_elapsedTime = m_startTime;
+    m_startTime = 0;
+}
+void World::updateObjectsPos()
+{
+    for(auto& i : masterList)
     {
-      i->m_oldPosY = i->m_posY;
-      i->m_oldPosX = i->m_posX;
-      i->m_posY += i->m_velY*m_elapsedTime*0.2;
-      i->m_posX += i->m_velX*m_elapsedTime*0.2;
+        if(i->m_isDynamic)
+        {
+            i->m_oldPosY = i->m_posY;
+            i->m_oldPosX = i->m_posX;
+            i->m_posY += (i->m_velY*m_elapsedTime)/m_calcs;
+            i->m_posX += (i->m_velX*m_elapsedTime)/m_calcs;
+        }
     }
-  }
 }
