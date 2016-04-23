@@ -4,7 +4,6 @@ DynamicCircle::DynamicCircle(float _posX, float _posY)
 {
     m_posX = _posX;
     m_posY = _posY;
-    m_mass = ((double) rand() / (RAND_MAX));
     m_radius = rand() % 5 + 10;
     m_radius /= 100;
 }
