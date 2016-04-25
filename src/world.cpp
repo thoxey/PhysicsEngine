@@ -93,18 +93,26 @@ void World::collisionDetection()
                     {
                         reaction(j, hyp, massRatJ, -dX, -dY);
                     }
-                    break;
                 }
             }
-            //            (masterList[i]->m_isCircle == true  && masterList[j]->m_isCircle == false)||
-            //                    (masterList[i]->m_isCircle == false && masterList[j]->m_isCircle == true)||
-            //                    (masterList[i]->m_isCircle == false && masterList[j]->m_isCircle == false)&&
-            //                    (dX>sumOfRads && dY>sumOfRads)
-            else
+/*
+            else if((masterList[i]->m_isCircle == false && masterList[j]->m_isCircle == false)&&(std::abs(dX)<sumOfRads && std::abs(dY)<sumOfRads))
             {
-                if(std::abs(dX)<sumOfRads && std::abs(dY)<sumOfRads)
+                double hyp = 1;
+                if(masterList[i]->m_isDynamic)
                 {
-                    double hyp = ((sumOfRads-dX)+(sumOfRads-dY))/2;
+                    reaction(i, hyp, massRatI, dX, dY);
+                }
+                if(masterList[j]->m_isDynamic)
+                {
+                    reaction(j, hyp, massRatJ, -dX, -dY);
+                }            }
+            else if(masterList[i]->m_isCircle == true  && masterList[j]->m_isCircle == false)
+            {
+                double sumOfSquares = sqrt(dX*dX + dY*dY);
+                double hyp = 1;
+                if(sumOfRads > sumOfSquares)
+                {
                     if(masterList[i]->m_isDynamic)
                     {
                         reaction(i, hyp, massRatI, dX, dY);
@@ -113,13 +121,30 @@ void World::collisionDetection()
                     {
                         reaction(j, hyp, massRatJ, -dX, -dY);
                     }
-                    break;
                 }
             }
-            //            else
-            //            {
-            //                masterList[j]->m_isColliding == false;
-            //            }
+*/
+            else if(masterList[i]->m_isCircle == false && masterList[j]->m_isCircle ==  true)
+            {
+                double sumOfSquares = sqrt(dX*dX + dY*dY);
+                double hyp = 1;
+                if(sumOfRads > sumOfSquares)
+                {
+                    if(masterList[i]->m_isDynamic)
+                    {
+                        reaction(i, hyp, massRatI, dX, dY);
+                    }
+                    if(masterList[j]->m_isDynamic)
+                    {
+                        reaction(j, hyp, massRatJ, -dX, -dY);
+                    }
+                }
+                break;
+            }
+            else
+            {
+                masterList[j]->m_isColliding == false;
+            }
         }
     }
 }
@@ -127,9 +152,9 @@ void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _d
 {
     masterList[_i]->m_isColliding = true;
     masterList[_i]->m_posX += _dX/DAMPNER;
-    masterList[_i]->m_velX += _hyp*_massRat*masterList[_i]->m_bounce;
+    masterList[_i]->m_velX *= _hyp*_massRat*masterList[_i]->m_bounce;
     masterList[_i]->m_posY += _dY/DAMPNER;
-    masterList[_i]->m_velY += _hyp*_massRat*masterList[_i]->m_bounce;
+    masterList[_i]->m_velY *= _hyp*_massRat*masterList[_i]->m_bounce;
 }
 
 void World::calcVelX()

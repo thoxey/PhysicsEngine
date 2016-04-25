@@ -45,7 +45,7 @@ public:
     bool m_xray = true;
     bool m_gravOn = true;
 
-    int m_calcs = 5;
+    int m_calcs = 3;
 
     void updateObjectsPos();
 
