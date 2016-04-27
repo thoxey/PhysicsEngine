@@ -5,7 +5,7 @@
 class DynamicCircle : public DynamicObject
 {
 public:
-  DynamicCircle(float _posX, float _posY);
+  DynamicCircle(float _posX, float _posY, int _radMod);
   void draw(bool _xray);
 };
 

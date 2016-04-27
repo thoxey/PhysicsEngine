@@ -6,7 +6,7 @@
 class StaticCircle : public GameObject
 {
 public:
-  StaticCircle(float _posX, float _posY);
+  StaticCircle(float _posX, float _posY, int _radMod);
 
   void draw(bool _xray);
   void detectCollision();

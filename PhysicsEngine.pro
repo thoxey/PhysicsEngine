@@ -23,15 +23,11 @@ SOURCES += src/main.cpp \
     src/gameobject.cpp \
     src/staticcircle.cpp \
     src/dynamicobject.cpp \
-    src/dynamiccircle.cpp \
-    src/staticsquare.cpp \
-    src/dynamicsquare.cpp
+    src/dynamiccircle.cpp
 
 HEADERS += \
     src/world.h \
     src/gameobject.h \
     src/staticcircle.h \
     src/dynamicobject.h \
-    src/dynamiccircle.h \
-    src/staticsquare.h \
-    src/dynamicsquare.h
+    src/dynamiccircle.h
