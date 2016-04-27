@@ -1,7 +1,7 @@
 #ifndef DYNAMICCIRCLE_H
 #define DYNAMICCIRCLE_H
 #include "dynamicobject.h"
-
+//--------------------------------------------------------------------------------------------------------------------------------------------
 class DynamicCircle : public DynamicObject
 {
 public:

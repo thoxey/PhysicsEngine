@@ -1,6 +1,5 @@
 #ifndef GameObject_H
 #define GameObject_H
-
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -15,6 +14,7 @@
 #include <vector>
 #define PI 3.141592653589793
 #define TWOPI 6.283185307
+//--------------------------------------------------------------------------------------------------------------------------------------------
 class GameObject
 {
 public:
@@ -34,7 +34,6 @@ public:
   float m_mass       = 1.0f;
   bool m_isColliding = false;
   bool m_isDynamic   = false;
-  bool m_isCircle    = true;
   void initDeltaTime();
   void setDeltaTime();
   double m_timer;
@@ -44,5 +43,4 @@ public:
   int m_oldTime;
   int m_curTime;
 };
-
 #endif // GameObject_H

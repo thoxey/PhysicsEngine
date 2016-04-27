@@ -1,5 +1,5 @@
 #include "staticcircle.h"
-
+//--------------------------------------------------------------------------------------------------------------------------------------------
 StaticCircle::StaticCircle(float _posX, float _posY, int _radMod)
 {
   m_mass = ((double) rand() / (RAND_MAX));
@@ -9,6 +9,7 @@ StaticCircle::StaticCircle(float _posX, float _posY, int _radMod)
   m_radius = rand() % _radMod + _radMod;
   m_radius /= 100;
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------
 void StaticCircle::draw(bool _xray)
 {
   int points = 30;

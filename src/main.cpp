@@ -1,18 +1,20 @@
-
 #include "world.h"
 #include "gameobject.h"
 #include "dynamicobject.h"
 #include "dynamiccircle.h"
 #include "staticcircle.h"
-#define WINDOW_TITLE "Being outsmarted by a whole bunch of circles"
-#define WIDTH 1000
-#define HEIGHT 1000
+#include "button.h"
+#define WINDOW_TITLE "Needs Work, 10/10 - IGN"
+#define WIDTH 800
+#define HEIGHT 800
+//--------------------------------------------------------------------------------------------------------------------------------------------
 World *scene = NULL;
+Button *gui = NULL;
 SDL_Window* gWindow = NULL;
 SDL_GLContext gContext;
 float convertPixCoorX(int _x);
 float convertPixCoorY(int _y);
-
+//--------------------------------------------------------------------------------------------------------------------------------------------
 int initSDL()
 {
   if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER ) < 0 )
@@ -37,6 +39,7 @@ int initSDL()
   }
   return EXIT_SUCCESS;
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------
 Uint32 timerCallback(Uint32 interval, void *) {
   if (scene != NULL)
   {
@@ -45,35 +48,31 @@ Uint32 timerCallback(Uint32 interval, void *) {
       scene->updateObjectsVel();
       scene->updateObjectsPos();
     }
-
   }
   return interval;
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------
 int main() {
   if( initSDL() == EXIT_FAILURE )
     return EXIT_FAILURE;
-
   gContext = SDL_GL_CreateContext( gWindow );
   if( gContext == NULL )
     return EXIT_FAILURE;
-
   if( SDL_GL_SetSwapInterval( 1 ) < 0 )
   {
     fprintf(stderr, "Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError() );
   }
+  gui = new Button();
   scene = new World();
   scene->init();
   scene->resize(WIDTH, HEIGHT);
   SDL_TimerID timerID = SDL_AddTimer(10, timerCallback, (void*) NULL);
   //Main loop flag
   bool quit = false;
-
   //Event handler
   SDL_Event e;
-
   //Enable text input
   SDL_StartTextInput();
-
   //While application is running
   while(!quit)
   {
@@ -146,40 +145,36 @@ int main() {
       }
     }
     //Render the scene
-
     scene->draw();
     //scene->updateObjects();
     for(auto& i : scene->masterList)
     {
       i->draw(scene->m_xray);
     }
+    gui->draw();
     //Update screen
     SDL_GL_SwapWindow( gWindow );
   }
-
   //Disable text input
   SDL_StopTextInput();
-
   // Disable our timer
   SDL_RemoveTimer(timerID);
-
   // Delete our scene
   delete scene;
-
   //Destroy window
   SDL_DestroyWindow( gWindow );
-
   //Quit SDL subsystems
   SDL_Quit();
-
   return EXIT_SUCCESS;
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------
 float convertPixCoorX(int _x)
 {
   float f = static_cast<float>(_x);
   f = static_cast<float>((f/WIDTH)*2-1);
   return f;
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------
 float convertPixCoorY(int _y)
 {
   float f = static_cast<float>(_y);
