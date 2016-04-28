@@ -1,11 +1,19 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 #ifdef __APPLE__
+#include <SDL.h>
+#include <SDL_image.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#include <OpenGL/glext.h>
+#include <GLUT/glut.h>
 #else
+#include <SDL2/SDL.h>
+
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <GL/glext.h>
+#include <GL/glut.h>
 #endif
 #include <vector>
 #include <iostream>

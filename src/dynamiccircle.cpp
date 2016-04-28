@@ -12,7 +12,8 @@ DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
 //--------------------------------------------------------------------------------------------------------------------------------------------
 void DynamicCircle::draw(bool _xray)
 {
-    int points = 10*m_radMod;
+    int points = 5*m_radMod+5;
+    std::cout<<5*m_radMod+5<<std::endl;
     if(_xray)
     {
         glBegin(GL_TRIANGLE_FAN); //Solid
