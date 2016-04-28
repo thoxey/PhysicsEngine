@@ -39,7 +39,7 @@ public:
   double m_timer;
   double m_deltaTime;
   /// World Variables
-  const float m_g = 9.8f;
+  const float m_g = 9.8f/10;
   int m_oldTime;
   int m_curTime;
 };

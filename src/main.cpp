@@ -5,8 +5,8 @@
 #include "staticcircle.h"
 #include "button.h"
 #define WINDOW_TITLE "Needs Work, 10/10 - IGN"
-#define WIDTH 800
-#define HEIGHT 800
+#define WIDTH 1000
+#define HEIGHT 1000
 //--------------------------------------------------------------------------------------------------------------------------------------------
 World *scene = NULL;
 Button *gui = NULL;
@@ -164,7 +164,7 @@ int main() {
             {
                 int x , y;
                 SDL_GetMouseState( &x, &y );
-                if(convertPixCoorY(y) >= 0.9)
+                if(e.button.button == SDL_BUTTON_LEFT && convertPixCoorY(y) >= 0.9)
                 {
                     if((convertPixCoorX(x) > gui->m_leftBounds[0]) && (convertPixCoorX(x) < gui->m_leftBounds[1]))
                     {
@@ -205,6 +205,24 @@ int main() {
                     {
                         scene->m_shapeSwitch = false;
                     }
+                }
+                else if(e.button.button == SDL_BUTTON_LEFT && convertPixCoorY(y) <= 0.9)
+                {
+                  GameObject *newShape;
+                  if(scene->m_shapeSwitch)
+                  {
+                      int x , y;
+                      SDL_GetMouseState( &x, &y );
+                      newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                      scene->masterList.push_back(newShape);
+                  }
+                  else
+                  {
+                      int x , y;
+                      SDL_GetMouseState( &x, &y );
+                      newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                      scene->masterList.push_back(newShape);
+                  }
                 }
             }
         }

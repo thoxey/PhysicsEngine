@@ -9,7 +9,7 @@
 #include <GLUT/glut.h>
 #else
 #include <SDL2/SDL.h>
-
+#include <SDL_image.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glext.h>
