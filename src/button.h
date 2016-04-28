@@ -7,6 +7,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #endif
+#include <vector>
 #include <iostream>
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class Button
@@ -21,5 +22,8 @@ public:
     void draw();
     float convertPixCoorX(int _x);
     float convertPixCoorY(int _Y);
+    std::vector<float> m_leftBounds;
+    std::vector<float> m_rightBounds;
+
 };
 #endif // BUTTON_H

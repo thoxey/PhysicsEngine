@@ -18,7 +18,6 @@ void StaticCircle::draw(bool _xray)
   {
     glBegin(GL_TRIANGLE_FAN); //Solid
     glColor3f(1.0f/m_radMod, 1.0f, m_mass);
-    glVertex2f(m_posX, m_posY);
     for(int i = 0; i <= points;i++)
     {
       glVertex2f(m_posX + (m_radius * cos(i * twicePi / points)), m_posY + (m_radius * sin(i * twicePi / points)));
@@ -29,7 +28,6 @@ void StaticCircle::draw(bool _xray)
   {
     glBegin(GL_LINE_LOOP); //HOLLOW
     glColor3f(1.0f/m_radMod, 1.0f, m_mass);
-    glVertex2f(m_posX, m_posY);
     for(int i = 0; i <= points;i++)
     {
       glVertex2f(m_posX + (m_radius * cos(i * twicePi / points)), m_posY + (m_radius * sin(i * twicePi / points)));

@@ -29,6 +29,7 @@ public:
     std::vector<GameObject*> masterList;
     bool m_xray = true;
     bool m_gravOn = true;
+    bool m_shapeSwitch = true;
     int m_calcs = 5;
     int m_shapeSize = 5;
     void updateObjectsPos();
