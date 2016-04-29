@@ -27,7 +27,9 @@
 *.out
 *.app
 
-MakeFile
+Makefile
 *.pro.*
 physics
 *.stash
+
+Makefile

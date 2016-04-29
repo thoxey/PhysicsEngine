@@ -1,3 +1,5 @@
+///  @file Name.cpp
+///  @brief A short description of the module
 #include "world.h"
 #include "gameobject.h"
 #include "dynamicobject.h"
@@ -5,15 +7,11 @@
 #include "staticcircle.h"
 #include "button.h"
 #define WINDOW_TITLE "Needs Work, 10/10 - IGN"
-#define WIDTH 1000
-#define HEIGHT 1000
 //--------------------------------------------------------------------------------------------------------------------------------------------
 World *scene = NULL;
 Button *gui = NULL;
 SDL_Window* gWindow = NULL;
 SDL_GLContext gContext;
-float convertPixCoorX(int _x);
-float convertPixCoorY(int _y);
 //--------------------------------------------------------------------------------------------------------------------------------------------
 int initSDL()
 {
@@ -122,14 +120,14 @@ int main() {
                 {
                     int x , y;
                     SDL_GetMouseState( &x, &y );
-                    newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                    newShape = new StaticCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                     scene->masterList.push_back(newShape);
                 };break;
                 case SDLK_c :
                 {
                     int x , y;
                     SDL_GetMouseState( &x, &y );
-                    newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                    newShape = new DynamicCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                     scene->masterList.push_back(newShape);
                 };break;
                 case SDLK_UP :
@@ -147,14 +145,14 @@ int main() {
                     {
                         int x , y;
                         SDL_GetMouseState( &x, &y );
-                        newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                        newShape = new DynamicCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                         scene->masterList.push_back(newShape);
                     }
                     else
                     {
                         int x , y;
                         SDL_GetMouseState( &x, &y );
-                        newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                        newShape = new StaticCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                         scene->masterList.push_back(newShape);
                     }
                 };break;
@@ -164,9 +162,9 @@ int main() {
             {
                 int x , y;
                 SDL_GetMouseState( &x, &y );
-                if(e.button.button == SDL_BUTTON_LEFT && convertPixCoorY(y) >= 0.9)
+                if(e.button.button == SDL_BUTTON_LEFT && gui->convertPixCoorY(y) >= 0.9)
                 {
-                    if((convertPixCoorX(x) > gui->m_leftBounds[0]) && (convertPixCoorX(x) < gui->m_leftBounds[1]))
+                    if((gui->convertPixCoorX(x) > gui->m_leftBounds[0]) && (gui->convertPixCoorX(x) < gui->m_leftBounds[1]))
                     {
                         if(scene->m_gravOn)
                         {
@@ -177,7 +175,7 @@ int main() {
                             scene->m_gravOn = true;
                         }
                     }
-                    else if((convertPixCoorX(x) > gui->m_leftBounds[1]) && (convertPixCoorX(x) < gui->m_leftBounds[2]))
+                    else if((gui->convertPixCoorX(x) > gui->m_leftBounds[1]) && (gui->convertPixCoorX(x) < gui->m_leftBounds[2]))
                     {
                         if(scene->m_xray)
                         {
@@ -188,39 +186,39 @@ int main() {
                             scene->m_xray = true;
                         }
                     }
-                    else if((convertPixCoorX(x) > gui->m_leftBounds[2]) && (convertPixCoorX(x) < gui->m_leftBounds[3]))
+                    else if((gui->convertPixCoorX(x) > gui->m_leftBounds[2]) && (gui->convertPixCoorX(x) < gui->m_leftBounds[3]))
                     {
                         if(scene->m_shapeSize > 1)
                             scene->m_shapeSize -= 1;
                     }
-                    else if((convertPixCoorX(x) > gui->m_leftBounds[3]) && (convertPixCoorX(x) < gui->m_leftBounds[4]))
+                    else if((gui->convertPixCoorX(x) > gui->m_leftBounds[3]) && (gui->convertPixCoorX(x) < gui->m_leftBounds[4]))
                     {
                         scene->m_shapeSize += 1;
                     }
-                    else if((convertPixCoorX(x) > gui->m_leftBounds[4]) && (convertPixCoorX(x) < gui->m_leftBounds[5]))
+                    else if((gui->convertPixCoorX(x) > gui->m_leftBounds[4]) && (gui->convertPixCoorX(x) < gui->m_leftBounds[5]))
                     {
                         scene->m_shapeSwitch = true;
                     }
-                    else if((convertPixCoorX(x) > gui->m_leftBounds[5]) && (convertPixCoorX(x) < 1.0F))
+                    else if((gui->convertPixCoorX(x) > gui->m_leftBounds[5]) && (gui->convertPixCoorX(x) < 1.0F))
                     {
                         scene->m_shapeSwitch = false;
                     }
                 }
-                else if(e.button.button == SDL_BUTTON_LEFT && convertPixCoorY(y) <= 0.9)
+                else if(e.button.button == SDL_BUTTON_LEFT && gui->convertPixCoorY(y) <= 0.9)
                 {
                   GameObject *newShape;
                   if(scene->m_shapeSwitch)
                   {
                       int x , y;
                       SDL_GetMouseState( &x, &y );
-                      newShape = new DynamicCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                      newShape = new DynamicCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                       scene->masterList.push_back(newShape);
                   }
                   else
                   {
                       int x , y;
                       SDL_GetMouseState( &x, &y );
-                      newShape = new StaticCircle(convertPixCoorX(x), convertPixCoorY(y), scene->m_shapeSize);
+                      newShape = new StaticCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                       scene->masterList.push_back(newShape);
                   }
                 }
@@ -249,18 +247,4 @@ int main() {
     SDL_Quit();
     return EXIT_SUCCESS;
 }
-//--------------------------------------------------------------------------------------------------------------------------------------------
-float convertPixCoorX(int _x)
-{
-    float f = static_cast<float>(_x);
-    f = static_cast<float>((f/WIDTH)*2-1);
-    return f;
-}
-//--------------------------------------------------------------------------------------------------------------------------------------------
-float convertPixCoorY(int _y)
-{
-    float f = static_cast<float>(_y);
-    float flippedHeight =  std::abs(HEIGHT-f);
-    f = static_cast<float>((flippedHeight/HEIGHT)*2-1);
-    return f;
-}
+

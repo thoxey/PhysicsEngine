@@ -2,6 +2,7 @@ TEMPLATE = app
 TARGET = physics
 CONFIG += debug
 CONFIG += c++11
+CONFIG -= app_bundle
 
 OBJECTS_DIR = obj
 
@@ -41,4 +42,4 @@ macx: {
   LIBS+= -framework OpenGL
 }
 
-OTHER_FILES += *.jpg
+OTHER_FILES += *.png

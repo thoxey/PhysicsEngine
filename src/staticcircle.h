@@ -2,6 +2,13 @@
 #define STATICCIRCLE_H
 #include "gameobject.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
+/// \author Tom Hoxey
+/// \version 1.0
+/// \date 28/04/16 \n
+
+/// \class NAME OF YOUR CLASS GOES HERE
+/// \brief PUT A BRIEF DESCRIPTION OF THE CLASS HERE
+//--------------------------------------------------------------------------------------------------------------------------------------------
 class StaticCircle : public GameObject
 {
 public:

@@ -1,17 +1,16 @@
+///  @file Name.cpp
+///  @brief A short description of the module
 #include "world.h"
 #define DAMPNER 0.03
 #define BOUND 0.9
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief World::World Constructor and sets the starting shape size
 World::World() : m_isInit(false),m_startTime(0.0),m_elapsedTime(0.0)
 {
     m_shapeSize = 5;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-///@brief World::~World destructorize this thing. Make sure to eliminate dynamically allocated memory.
 World::~World(){}
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief World::init initialises the GL World, enabling features that are needed
 void World::init()
 {
     if (m_isInit) return;
@@ -26,9 +25,6 @@ void World::init()
     m_isInit = true;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief World::resize needs to set up the camera paramaters (i.e. projection matrix) and the viewport
-/// @param w Width of window
-/// @param h Height of window
 void World::resize(int w, int h)
 {
     if (!m_isInit) return;
@@ -39,7 +35,6 @@ void World::resize(int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-///@brief World::draw draws the World to the current GL context. Called a lot - make this fast!
 void World::draw() {
     if (!m_isInit) return;
     // Clear the display buffer
@@ -47,7 +42,6 @@ void World::draw() {
 
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief World::collisionDetection detects whether two objects are colliding, then calls the reaction if they are
 void World::collisionDetection()
 {
     for(int i = 0; i < masterList.size(); ++i)
@@ -81,22 +75,6 @@ void World::collisionDetection()
     }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief This applies the reaction forces to the shapes
-/// @param _i this is the number in the master list of the object reacting
-/// @param _hyp this is the distance of intersection of the two objects
-/// @param _massRat This is the ratio of the masses, which are semi-random and based on size
-/// @param _dX the distance between the centres of the shapes on the x axis
-/// @param _dX the distance between the centres of the shapes on the y axis
-void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _dY)
-{
-    masterList[_i]->m_isColliding = true;
-    masterList[_i]->m_posX += _dX*DAMPNER;
-    masterList[_i]->m_velX *= _hyp*_massRat*masterList[_i]->m_bounce*DAMPNER;
-    masterList[_i]->m_posY += _dY*DAMPNER;
-    masterList[_i]->m_velY *= _hyp*_massRat*masterList[_i]->m_bounce*DAMPNER;
-}
-//--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief This calculates the X velocity, and keeps it in the x bounds
 void World::calcVelX()
 {
     for(auto& i : masterList)
@@ -114,7 +92,6 @@ void World::calcVelX()
     }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief This calculates the Y velocity, and keeps it in the y bounds (with room for buttons at the top)
 void World::calcVelY()
 {
     for(auto& i : masterList)
@@ -136,7 +113,6 @@ void World::calcVelY()
     }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief This calls all of the velocity changing functions and handles the timer
 void World::updateObjectsVel()
 {
     m_startTime += 0.001;
@@ -147,7 +123,6 @@ void World::updateObjectsVel()
     m_startTime = 0;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// @brief This updates the position of the objects once the velocities have been updated
 void World::updateObjectsPos()
 {
     for(auto& i : masterList)
@@ -159,3 +134,13 @@ void World::updateObjectsPos()
         }
     }
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------
+void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _dY)
+{
+    masterList[_i]->m_isColliding = true;
+    masterList[_i]->m_posX += _dX*DAMPNER;
+    masterList[_i]->m_velX *= _hyp*_massRat*masterList[_i]->m_bounce*DAMPNER;
+    masterList[_i]->m_posY += _dY*DAMPNER;
+    masterList[_i]->m_velY *= _hyp*_massRat*masterList[_i]->m_bounce*DAMPNER;
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,3 +1,5 @@
+///  @file Name.cpp
+///  @brief A short description of the module
 #include "staticcircle.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 StaticCircle::StaticCircle(float _posX, float _posY, int _radMod)

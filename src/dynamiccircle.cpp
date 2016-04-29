@@ -1,3 +1,5 @@
+///  @file Name.cpp
+///  @brief A short description of the module
 #include "dynamiccircle.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
@@ -7,17 +9,19 @@ DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
     m_posY = _posY;
     m_radius = rand() % _radMod + _radMod;
     m_radius /= 100;
-    m_mass += m_radius;
+    m_mass += (m_radius*m_radius);
+    m_col =  rand() % 10;
+    m_col /= 10;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 void DynamicCircle::draw(bool _xray)
 {
     int points = 5*m_radMod+5;
-    std::cout<<5*m_radMod+5<<std::endl;
+    std::cout<<m_col<<std::endl;
     if(_xray)
     {
         glBegin(GL_TRIANGLE_FAN); //Solid
-        glColor3f(1.0f/m_radMod, m_mass, 1.0f);
+        glColor3f(0.6f, m_col, 0.8f);
         for(int i = 0; i <= points;i++)
         {
             glVertex2f(m_posX + (m_radius * cos(i * TWOPI / points)), m_posY + (m_radius * sin(i * TWOPI / points)));
@@ -27,7 +31,7 @@ void DynamicCircle::draw(bool _xray)
     else
     {
         glBegin(GL_LINE_LOOP); //HOLLOW
-        glColor3f(1.0f/m_radMod, m_mass, 1.0f);
+        glColor3f(0.6f, m_col, 0.8f);
         for(int i = 0; i <= points;i++)
         {
             glVertex2f(m_posX + (m_radius * cos(i * TWOPI / points)), m_posY + (m_radius * sin(i * TWOPI / points)));
