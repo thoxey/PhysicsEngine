@@ -1,75 +1,70 @@
 #ifndef WORLD_H
 #define WORLD_H
-#ifdef __APPLE__
-#include <SDL.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <OpenGL/glext.h>
-#include <GLUT/glut.h>
-#else
-#include <SDL2/SDL.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glext.h>
-#include <GL/glut.h>
-#endif
 #include <vector>
 #include <cmath>
 #include "gameobject.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
-/// \author Tom Hoxey
-/// \version 1.0
-/// \date 28/04/16 \n
+/// @author Tom Hoxey & Richard Southern
+/// @version 1.0
+/// @date 28/04/16
 
-/// \class NAME OF YOUR CLASS GOES HERE
-/// \brief PUT A BRIEF DESCRIPTION OF THE CLASS HERE
+/// @class World
+/// @brief This class is the backbone of the program, it handles the SDL/GL window and rendering and the collision detection, and reaction for the objects
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /// @brief The Scene class, contains all the collision code
 class World
 {
 public:
-    /// @brief World::World Constructor and sets the starting shape size
+    /// @brief World::World             Constructor and sets the starting shape size
     World();
-    ///@brief World::~World destructorize this thing. Make sure to eliminate dynamically allocated memory.
+    ///@brief World::~World             destructorize this thing. Make sure to eliminate dynamically allocated memory.
     virtual ~World();
-    /// @brief World::init initialises the GL World, enabling features that are needed
+    /// @brief World::init              initialises the GL World, enabling features that are needed
     virtual void init();
-    /// @brief World::resize needs to set up the camera paramaters (i.e. projection matrix) and the viewport
+    /// @brief World::resize            needs to set up the camera paramaters (i.e. projection matrix) and the viewport
     /// @param w Width of window
     /// @param h Height of window
     virtual void resize(int w, int h);
-    ///@brief World::draw draws the World to the current GL context. Called a lot - make this fast!
+    ///@brief World::draw               Draws the World to the current GL context
     virtual void draw();
-    /// @brief This updates the position of the objects once the velocities have been updated
+    /// @brief World::updateObjectsPos  This updates the position of the objects once the velocities have been updated
     void updateObjectsPos();
-    /// @brief This calls all of the velocity changing functions and handles the timer
+    /// @brief World::updateObjectsVel  This calls all of the velocity changing functions and handles the timer
     void updateObjectsVel();
-
-    std::vector<GameObject*> masterList;
+    /// @brief m_masterList             The list that contains all GameObjects in the scene
+    std::vector<GameObject*> m_masterList;
+    /// @brief m_xray                   This bool allows for the swapping between the 'solid and 'hollow' draw methods
     bool m_xray = true;
+    /// @brief m_gravOn                 This bool allows for turning gravity on and off
     bool m_gravOn = true;
+    /// @brief m_shapeSwitch            This changes which shape is created on the left click or space bar
     bool m_shapeSwitch = true;
+    /// @brief m_calcs                  This is how many times the objects are updated before drawing
     int m_calcs = 5;
+    /// @brief m_shapeSize              This is changes the GameObject.m_radMod during runtime via the arrow keys or UI
     int m_shapeSize = 5;
-//--------------------------------------------------------------------------------------------------------------------------------------------
-private:
-    /// @brief World::collisionDetection detects whether two objects are colliding, then calls the reaction if they are
-    void collisionDetection();
-    /// @brief This calculates the X velocity, and keeps it in the x bounds
-    void calcVelX();
-    /// @brief This calculates the Y velocity, and keeps it in the y bounds (with room for buttons at the top)
-    void calcVelY();
-    /// @brief This applies the reaction forces to the shapes
-    /// @param _i this is the number in the master list of the object reacting
-    /// @param _hyp this is the distance of intersection of the two objects
-    /// @param _massRat This is the ratio of the masses, which are semi-random and based on size
-    /// @param _dX the distance between the centres of the shapes on the x axis
-    /// @param _dX the distance between the centres of the shapes on the y axis
-    void reaction(int _i, double _hyp, double _massRat, double _dX, double _dY);
-
-    bool m_isInit;
+    ///@brief m_startTime                  This is used for
     double m_startTime;
+    ///@brief m_
     double m_elapsedTime;
-//--------------------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------------------
+private:
+    /// @brief World::collisionDetection   Detects whether two objects are colliding, then calls the reaction if they are
+    void collisionDetection();
+    /// @brief World::calcVelX             This calculates the X velocity, and keeps it in the x bounds
+    void calcVelX();
+    /// @brief World::calcVelY             This calculates the Y velocity, and keeps it in the y bounds (with room for buttons at the top)
+    void calcVelY();
+    /// @brief Wolrd::reaction             This applies the reaction forces to the shapes
+    /// @param _i                           The number in the master list of the object reacting
+    /// @param _hyp                         The distance of intersection of the two objects
+    /// @param _massRat                     The ratio of the masses, which are semi-random and based on size
+    /// @param _dX                          The distance between the centres of the shapes on the x axis
+    /// @param _dX                          The distance between the centres of the shapes on the y axis
+    void reaction(int _i, double _hyp, double _massRat, double _dX, double _dY);
+    ///@brief m_isInit                     Used for a sanity check, making sure the world is initialised before continuing
+    bool m_isInit;
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------
 };
 #endif // WORLD_H

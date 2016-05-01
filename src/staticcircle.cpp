@@ -1,5 +1,5 @@
-///  @file Name.cpp
-///  @brief A short description of the module
+///  @file staticcircle.cpp
+/// @brief This class handles the construction and drawing of the static circles on the screen
 #include "staticcircle.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 StaticCircle::StaticCircle(float _posX, float _posY, int _radMod)

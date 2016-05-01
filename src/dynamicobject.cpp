@@ -1,5 +1,5 @@
-///  @file Name.cpp
-///  @brief A short description of the module
+///  @file dynamicobject.cpp
+/// @brief This class sets any children to be dynamic
 #include "dynamicobject.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 DynamicObject::DynamicObject()

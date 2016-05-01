@@ -1,5 +1,5 @@
-///  @file Name.cpp
-///  @brief A short description of the module
+///  @file gameobject.cpp
+/// @brief This is the parent class for all the possible objects, static objects inherit directly from this
 #include "gameobject.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 GameObject::GameObject()

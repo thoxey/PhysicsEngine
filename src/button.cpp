@@ -1,5 +1,5 @@
-///  @file Name.cpp
-///  @brief A short description of the module
+///  @file button.cpp
+/// @brief This class handles the buttons at the top of the screen, it stores thier positions, handles the texturing and the mouse coordinate conversion
 #include "button.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 Button::Button()

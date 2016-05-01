@@ -7,7 +7,7 @@
 /// @date 28/04/16
 
 /// @class DynamicCircle
-/// @brief This class handles the construction and drawing of the circles on the screen
+/// @brief This class handles the construction and drawing of the dynaimc circles on the screen
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class DynamicCircle : public DynamicObject
 {

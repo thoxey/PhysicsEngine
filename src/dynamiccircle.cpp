@@ -1,5 +1,5 @@
-///  @file Name.cpp
-///  @brief A short description of the module
+///  @file dynamiccircle.cpp
+/// @brief This class handles the construction and drawing of the dynaimc circles on the screen
 #include "dynamiccircle.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
@@ -9,7 +9,7 @@ DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
     m_posY = _posY;
     m_radius = rand() % _radMod + _radMod;
     m_radius /= 100;
-    m_mass += (m_radius*m_radius);
+    m_mass = (m_radius*m_radius);
     m_col =  rand() % 10;
     m_col /= 10;
 }
@@ -17,7 +17,6 @@ DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
 void DynamicCircle::draw(bool _xray)
 {
     int points = 5*m_radMod+5;
-    std::cout<<m_col<<std::endl;
     if(_xray)
     {
         glBegin(GL_TRIANGLE_FAN); //Solid
