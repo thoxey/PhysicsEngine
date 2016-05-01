@@ -199,11 +199,11 @@ int main() {
                     }
                     else if((gui->convertPixCoorX(x) > gui->m_leftBounds[4]) && (gui->convertPixCoorX(x) < gui->m_leftBounds[5]))
                     {
-                        scene->m_shapeSwitch = true;
+                        scene->m_masterList.pop_back();
                     }
                     else if((gui->convertPixCoorX(x) > gui->m_leftBounds[5]) && (gui->convertPixCoorX(x) < 1.0F))
                     {
-                        scene->m_shapeSwitch = false;
+                        scene->m_masterList.erase(scene->m_masterList.begin(),scene->m_masterList.end());
                     }
                 }
             }

@@ -40,14 +40,14 @@ void Button::draw()
 
     glBegin(GL_QUADS);
     glColor3f(1.0f, 1.0f, 1.0f);
-    glTexCoord2f(0, 0);
-    glVertex3f(X, Y, 0);
-    glTexCoord2f(1, 0);
-    glVertex3f(X + Width, Y, 0);
-    glTexCoord2f(1, 1);
-    glVertex3f(X + Width, Y + Height, 0);
-    glTexCoord2f(0, 1);
-    glVertex3f(X, Y + Height, 0);
+        glTexCoord2f(1, 1);
+    glVertex2f(X, Y);
+        glTexCoord2f(0, 1);
+    glVertex2f(X + Width, Y);
+        glTexCoord2f(0, 0);
+    glVertex2f(X + Width, Y + Height);
+        glTexCoord2f(1, 0);
+    glVertex2f(X, Y + Height);
     glEnd();
     /// end of Citation
     float i = -0.98f;

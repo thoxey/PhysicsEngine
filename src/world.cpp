@@ -65,7 +65,7 @@ void World::collisionDetection()
                 }
                 if(m_masterList[j]->m_isDynamic)
                 {
-                    reaction(j, -hyp, massRatJ, -dX, -dY);
+                    reaction(j, -hyp, -massRatJ, -dX, -dY);
                 }
             }
             else
@@ -109,10 +109,7 @@ void World::calcVelY()
         }
         if(m_gravOn)
         {
-            double old_velY = i->m_velY;
             i->m_velY -= i->m_g/5;
-            if(old_velY - i->m_g/5 != i->m_velY)
-                std::cout<<i->m_velY<<std::endl;
         }
     }
 }
@@ -123,7 +120,6 @@ void World::updateObjectsVel()
     calcVelX();
     calcVelY();
     collisionDetection();
-
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 void World::updateObjectsPos()
@@ -148,8 +144,10 @@ void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _d
 {
     m_masterList[_i]->m_isColliding = true;
     m_masterList[_i]->m_posX += _dX*DAMPNER; //Stops overlap being possible
-    m_masterList[_i]->m_velX *= _hyp*_massRat*m_masterList[_i]->m_bounce*DAMPNER;
+    m_masterList[_i]->m_velX += _hyp*_massRat;
+    m_masterList[_i]->m_velX *= _hyp*_massRat*m_masterList[_i]->m_bounce; //Removing _hyp*_massRat cripples performance, confusing
     m_masterList[_i]->m_posY += _dY*DAMPNER;
-    m_masterList[_i]->m_velY *= _hyp*_massRat*m_masterList[_i]->m_bounce*DAMPNER;
+    m_masterList[_i]->m_velY += _hyp*_massRat;
+    m_masterList[_i]->m_velY *= _hyp*_massRat*m_masterList[_i]->m_bounce;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
