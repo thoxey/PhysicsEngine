@@ -4,9 +4,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <OpenGL/glext.h>
-#include <GLUT/glut.h>
 #else
 #include <SDL2/SDL.h>
 #include <SDL_image.h>

@@ -1,0 +1,35 @@
+digraph "main"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="main",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Button::convertPixCoorX",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_button.html#adeff805f39ab343c5d1aac78e76d5d1e",tooltip="Button::convertPixCoorX This function converts the pixel coordinates in the X to a -1 ..."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Button::convertPixCoorY",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_button.html#a8323050ddc5270eacb08c4d5f13d7ee0",tooltip="Button::convertPixCoorX This function converst the pixel coordinates in the Y to a -1 ..."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="World::draw",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#ab51a17ccbb108616daacd0c34973dc8d",tooltip="World::draw Draws the World to the current GL context. "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Button::draw",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_button.html#a0380207dc9e4edcd0272207a39c7cdeb",tooltip="Button::draw This function renders the texture for the UI and sets the boundaries for the buttons..."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="World::init",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#a0150607a49c2400d5c848159dd02d533",tooltip="World::init initialises the GL World, enabling features that are needed. "];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="initSDL",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a9b043e37d70fb76bac0a10f7c0680b82"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="World::resize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#ae5f15f842db66aada56e7d3b14ef04fb",tooltip="World::resize needs to set up the camera paramaters (i.e. projection matrix) and the viewport..."];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="timerCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a6e0426437e0957b81f2bd08e1846f011"];
+  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="World::updateObjectsVel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#aeb89d588e16da0eb2ca6a22cda79e234",tooltip="World::updateObjectsVel This calls all of the velocity changing functions and handles the timer..."];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="World::calcVelX",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#a15c8ca55c7382acd728b97a42da1634b",tooltip="World::calcVelX This calculates the X velocity, and keeps it in the x bounds. "];
+  Node10 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node12 [label="World::calcVelY",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#acd055efb15d8312f0efc0c299f2aa800",tooltip="World::calcVelY This calculates the Y velocity, and keeps it in the y bounds (with room for buttons a..."];
+  Node10 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node13 [label="World::collisionDetection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#ab489f97a29330f8343b45c69c73b96b0",tooltip="World::collisionDetection Detects whether two objects are colliding, then calls the reaction if they ..."];
+  Node13 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node14 [label="World::reaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#aaa454be8e22ab328410f06bd3eb8a834",tooltip="Wolrd::reaction This applies the reaction forces to the shapes. "];
+  Node9 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node15 [label="World::updateObjectsPos",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_world.html#a1e17d822a73554635a868a99f756113b",tooltip="World::updateObjectsPos This updates the position of the objects once the velocities have been update..."];
+}
