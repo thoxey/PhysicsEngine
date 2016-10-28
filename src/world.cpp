@@ -44,9 +44,9 @@ void World::draw() {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 void World::collisionDetection()
 {
-    for(int i = 0; i < static_cast<int>(m_masterList.size()); ++i) //Cast to int from long to avoid warning message on compile
+    for(uint16_t i = 0; i < m_masterList.size(); ++i)
     {
-        for(int j = i+1; j < static_cast<int>(m_masterList.size()); ++j) //Nested loop to only compare collisions once i.e A > B and not B > A as well
+        for(uint16_t j = i+1; j < m_masterList.size(); ++j) //Nested loop to only compare collisions once i.e A > B and not B > A as well
         {
             double dX = m_masterList[i]->m_posX - m_masterList[j]->m_posX;
             double dY = m_masterList[i]->m_posY - m_masterList[j]->m_posY;

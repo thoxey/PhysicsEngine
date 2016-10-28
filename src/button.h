@@ -15,8 +15,8 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
-#define WIDTH 1000
-#define HEIGHT 1000
+#define WIDTH 800
+#define HEIGHT 800
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /// @author Tom Hoxey
 /// @version 1.0

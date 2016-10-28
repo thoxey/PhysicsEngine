@@ -5,6 +5,7 @@
 #include "dynamicobject.h"
 #include "dynamiccircle.h"
 #include "staticcircle.h"
+#include "staticline.h"
 #include "button.h"
 #define WINDOW_TITLE "Rigid Body Simlation"
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,6 +158,13 @@ int main() {
                 {
                     if(scene->m_shapeSize > 2)
                         scene->m_shapeSize -= 1;
+                };break;
+                case SDLK_l :
+                {
+                    int x , y;
+                    SDL_GetMouseState( &x, &y );
+                    newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x)+0.3f, gui->convertPixCoorY(y));
+                    scene->m_masterList.push_back(newShape);
                 };break;
                 }
             }

@@ -1,4 +1,4 @@
-///  @file staticcircle.cpp
+/// @file staticcircle.cpp
 /// @brief This class handles the construction and drawing of the static circles on the screen
 #include "staticcircle.h"
 //--------------------------------------------------------------------------------------------------------------------------------------------

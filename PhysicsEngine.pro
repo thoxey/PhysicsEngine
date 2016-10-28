@@ -14,7 +14,8 @@ SOURCES += src/main.cpp \
     src/staticcircle.cpp \
     src/dynamicobject.cpp \
     src/dynamiccircle.cpp \
-    src/button.cpp
+    src/button.cpp \
+    src/staticline.cpp
 
 
 HEADERS += \
@@ -23,7 +24,8 @@ HEADERS += \
     src/staticcircle.h \
     src/dynamicobject.h \
     src/dynamiccircle.h \
-    src/button.h
+    src/button.h \
+    src/staticline.h
 
 linux: {
   LIBS += $$system(sdl2-config --libs)
