@@ -4,6 +4,7 @@
 
 StaticLine::StaticLine(float _x1, float _y1, float _x2, float _y2)
 {
+    m_isCircle = false;
     m_posX = _x1;
     m_posY = _y1;
     m_posX2 = _x2;

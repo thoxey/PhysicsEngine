@@ -85,6 +85,7 @@ int main() {
         //Handle events on queue
         while( SDL_PollEvent( &e ) != 0 )
         {
+            GameObject *newShape;
             // The window has been resized
             if ((e.type == SDL_WINDOWEVENT) &&
                     (e.window.event == SDL_WINDOWEVENT_RESIZED)) {
@@ -97,7 +98,7 @@ int main() {
             }
             else if(e.type == SDL_KEYDOWN)
             {
-                GameObject *newShape;
+
                 switch (e.key.keysym.sym)
                 {
                 // if we have an escape quit
@@ -163,10 +164,17 @@ int main() {
                 {
                     int x , y;
                     SDL_GetMouseState( &x, &y );
-                    newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x)+0.3f, gui->convertPixCoorY(y));
+                    newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x), gui->convertPixCoorY(y));
                     scene->m_masterList.push_back(newShape);
+
                 };break;
                 }
+            }
+            else if(e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_l)
+            {
+                int x , y;
+                SDL_GetMouseState( &x, &y );
+                scene->m_masterList[scene->m_masterList.size()-1]->setPos2(gui->convertPixCoorX(x), gui->convertPixCoorY(y));
             }
             else if(e.type == SDL_MOUSEBUTTONDOWN )
             {

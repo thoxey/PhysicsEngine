@@ -29,12 +29,18 @@ class GameObject
 public:
     /// @brief GameObject::GameObject The constructor for the GameObject Class
     GameObject();
-    /// @brief GameObject::draw The draw for GameObject is pure virtuak as it cannot be drawn
+    /// @brief GameObject::draw The draw for GameObject is pure virtual as it cannot be drawn
     virtual void draw(bool _xray) = 0;
+    ///@brief GameObject::setPos2 Sets the second position for a line
+    void setPos2(float _x2, float _y2);
     /// @brief m_posY         is the Y position of the object in the -1 to 1 range
     double m_posY      = 0;
     /// @brief m_posX         is the X position of the object in the -1 to 1 range
     double m_posX      = 0;
+    /// @brief m_posX2         is the 2nd X position of the object in the -1 to 1 range, used for lines
+    double m_posX2     = 0;
+    /// @brief m_posY2         is the 2nd Y position of the object in the -1 to 1 range, used for lines
+    double m_posY2     = 0;
     /// @brief m_velX         is the X velocity of the object (m_posX * World.m_elapsedTime)
     double m_velX      = 0.0;
     /// @brief m_velY         is the Y velocity of the object (m_posY * World::m_elapsedTime)
@@ -51,6 +57,8 @@ public:
     bool m_isColliding = false;
     /// @brief m_isDynamic    bool used to add velocity etc to only the dynamic objects
     bool m_isDynamic   = false;
+    /// @brief m_isCircle    bool used to determine physics type to use
+    bool m_isCircle    = true;
     /// @brief m_g            gravity constant
     const float m_g = 9.8f;
 protected:

@@ -46,32 +46,45 @@ void World::collisionDetection()
 {
     for(uint16_t i = 0; i < m_masterList.size(); ++i)
     {
-        for(uint16_t j = i+1; j < m_masterList.size(); ++j) //Nested loop to only compare collisions once i.e A > B and not B > A as well
+        for(uint16_t j = i+1; j < m_masterList.size(); ++j) //Nested loop to only compare collisions once i.e A -> B and not B -> A as well
         {
-            double dX = m_masterList[i]->m_posX - m_masterList[j]->m_posX;
-            double dY = m_masterList[i]->m_posY - m_masterList[j]->m_posY;
-            double sumOfRads = m_masterList[i]->m_radius + m_masterList[j]->m_radius;  //Note to self:DONT change these to floats again, it will break it... again
-            double massRatI = m_masterList[i]->m_mass/(m_masterList[i]->m_mass+m_masterList[j]->m_mass);
-            double massRatJ = 1-massRatI; //Should be m_masterList[j]->m_mass/(m_masterList[i]->m_mass+m_masterList[j]->m_mass) but faster this way
-            double sumOfSquares = sqrt((dX*dX)+(dY*dY));
-            double hyp = asin(dY/sumOfSquares)*(sumOfRads-sumOfSquares);
-            if(hyp == 0)
-                hyp = 0.001; //Just in case
-            if(sumOfRads > sumOfSquares)
+            if( m_masterList[i]->m_isCircle && m_masterList[j]->m_isCircle)
             {
-                if(m_masterList[i]->m_isDynamic)
+                double dX = m_masterList[i]->m_posX - m_masterList[j]->m_posX;
+                double dY = m_masterList[i]->m_posY - m_masterList[j]->m_posY;
+                double sumOfRads = m_masterList[i]->m_radius + m_masterList[j]->m_radius;  //Note to self:DONT change these to floats again, it will break it... again
+                double massRatI = m_masterList[i]->m_mass/(m_masterList[i]->m_mass+m_masterList[j]->m_mass);
+                double massRatJ = 1-massRatI; //Should be m_masterList[j]->m_mass/(m_masterList[i]->m_mass+m_masterList[j]->m_mass) but faster this way
+                double sumOfSquares = sqrt((dX*dX)+(dY*dY));
+                double hyp = asin(dY/sumOfSquares)*(sumOfRads-sumOfSquares);
+                if(hyp == 0)
+                    hyp = 0.001; //Just in case
+                if(sumOfRads > sumOfSquares)
                 {
-                    reaction(i, hyp, massRatI, dX, dY);
+                    if(m_masterList[i]->m_isDynamic)
+                    {
+                        reaction(i, hyp, massRatI, dX, dY);
+                    }
+                    if(m_masterList[j]->m_isDynamic)
+                    {
+                        reaction(j, -hyp, -massRatJ, -dX, -dY);
+                    }
                 }
-                if(m_masterList[j]->m_isDynamic)
+                else
                 {
-                    reaction(j, -hyp, -massRatJ, -dX, -dY);
+                    m_masterList[j]->m_isColliding = false;
                 }
             }
-            else
-            {
-                m_masterList[j]->m_isColliding = false;
-            }
+            //WORK IN PROGRESS
+//            else if(m_masterList[i]->m_isCircle && !m_masterList[j]->m_isCircle)
+//            {
+//                float circleX = m_masterList[i]->m_posX;
+//                float lineX1 = m_masterList[j]->m_posX;
+//                float lineX2 = m_masterList[j]->m_posX2;
+
+//                if(circleX > lineX1 && circleX < lineX2)
+//                    m_masterList[i]->m_posY = m_masterList[j]->m_posY+m_masterList[i]->m_radius;
+//            }
         }
     }
 }

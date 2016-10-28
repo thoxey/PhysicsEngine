@@ -19,8 +19,6 @@ public:
     /// @brief StaticLine::draw This handles the drawing of the line onto the scree
     void draw(bool _xray);
 
-    double m_posX2;
-    double m_posY2;
 };
 
 #endif // STATICLINE_H
