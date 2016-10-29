@@ -81,9 +81,10 @@ void World::collisionDetection()
 //                float circleX = m_masterList[i]->m_posX;
 //                float lineX1 = m_masterList[j]->m_posX;
 //                float lineX2 = m_masterList[j]->m_posX2;
-
-//                if(circleX > lineX1 && circleX < lineX2)
-//                    m_masterList[i]->m_posY = m_masterList[j]->m_posY+m_masterList[i]->m_radius;
+//                float lineY1 = m_masterList[j]->m_posY;
+//                float lineY2 = m_masterList[j]->m_posY2;
+//                float lineVec1 = lineX1-lineY1;
+//                float lineVec2 = lineX2-lineY2;
 //            }
         }
     }

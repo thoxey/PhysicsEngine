@@ -2,6 +2,7 @@
 ///  @brief Contains the main game loop, all the code for the SDl window, this is the main body of the program
 #include "world.h"
 #include "gameobject.h"
+#include "vector2d.h"
 #include "dynamicobject.h"
 #include "dynamiccircle.h"
 #include "staticcircle.h"
@@ -166,7 +167,6 @@ int main() {
                     SDL_GetMouseState( &x, &y );
                     newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x), gui->convertPixCoorY(y));
                     scene->m_masterList.push_back(newShape);
-
                 };break;
                 }
             }

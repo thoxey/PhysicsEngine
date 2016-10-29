@@ -15,7 +15,8 @@ SOURCES += src/main.cpp \
     src/dynamicobject.cpp \
     src/dynamiccircle.cpp \
     src/button.cpp \
-    src/staticline.cpp
+    src/staticline.cpp \
+    src/vector2d.cpp
 
 
 HEADERS += \
@@ -25,7 +26,8 @@ HEADERS += \
     src/dynamicobject.h \
     src/dynamiccircle.h \
     src/button.h \
-    src/staticline.h
+    src/staticline.h \
+    src/vector2d.h
 
 linux: {
   LIBS += $$system(sdl2-config --libs)
@@ -34,6 +36,7 @@ linux: {
 
 
 macx: {
+  QMAKE_MAC_SDK = macosx10.12
   DEFINES+=MAC_OS_X_VERSION_MIN_REQUIRED=1060
   QMAKE_LFLAGS += -F/Library/Frameworks
   LIBS += -framework SDL2
