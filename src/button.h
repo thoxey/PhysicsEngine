@@ -32,10 +32,10 @@ public:
     Button();
     /// @brief Button::draw This function renders the texture for the UI and sets the boundaries for the buttons
     void draw();
-    /// @brief Button::convertPixCoorX This function converts the pixel coordinates in the X to a -1 , 1 range, for use with openGl\
+    /// @brief Button::convertPixCoorX This function converts the pixel coordinates in the X to a -1 , 1 range, for use with openGl
     /// @param int _x The X coordinate of the mouse
     float convertPixCoorX(int _x);
-    /// @brief Button::convertPixCoorX This function converst the pixel coordinates in the Y to a -1 , 1 range, for use with openGl\
+    /// @brief Button::convertPixCoorX This function converst the pixel coordinates in the Y to a -1 , 1 range, for use with openGl
     /// @param int _y This is the Y coordinate of the mouse
     float convertPixCoorY(int _Y);
     /// @brief m_width The width of the buttons

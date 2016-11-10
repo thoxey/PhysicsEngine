@@ -1,0 +1,14 @@
+<map id="gameobject.h" name="gameobject.h">
+<area shape="rect" id="node2" href="$dynamicobject_8h.html" title="dynamicobject.h" alt="" coords="140,80,255,107"/>
+<area shape="rect" id="node7" href="$gameobject_8cpp.html" title="This is the parent class for all the possible objects, static objects inherit directly from this..." alt="" coords="279,80,392,107"/>
+<area shape="rect" id="node8" href="$world_8h.html" title="world.h" alt="" coords="417,80,479,107"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="Contains the main game loop, all the code for the SDl window, this is the main body of the program..." alt="" coords="404,229,479,256"/>
+<area shape="rect" id="node10" href="$staticcircle_8h.html" title="staticcircle.h" alt="" coords="555,80,649,107"/>
+<area shape="rect" id="node12" href="$staticline_8h.html" title="staticline.h" alt="" coords="711,80,793,107"/>
+<area shape="rect" id="node3" href="$dynamiccircle_8h.html" title="dynamiccircle.h" alt="" coords="13,155,123,181"/>
+<area shape="rect" id="node6" href="$dynamicobject_8cpp.html" title="This class sets any children to be dynamic. " alt="" coords="147,155,276,181"/>
+<area shape="rect" id="node4" href="$dynamiccircle_8cpp.html" title="This class handles the construction and drawing of the dynaimc circles on the screen. " alt="" coords="5,229,131,256"/>
+<area shape="rect" id="node9" href="$world_8cpp.html" title="This class is the backbone of the program, it handles the SDL/GL window and rendering and the collisi..." alt="" coords="403,155,479,181"/>
+<area shape="rect" id="node11" href="$staticcircle_8cpp.html" title="This class handles the construction and drawing of the static circles on the screen. " alt="" coords="606,155,713,181"/>
+<area shape="rect" id="node13" href="$staticline_8cpp.html" title="This class handles the construction and drawing of the static lines on the screen. " alt="" coords="790,155,887,181"/>
+</map>

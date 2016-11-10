@@ -1,0 +1,6 @@
+<map id="GameObject" name="GameObject">
+<area shape="rect" id="node2" href="$class_dynamic_object.html" title="This class sets any children to be dynamic. " alt="" coords="5,373,133,451"/>
+<area shape="rect" id="node4" href="$class_static_circle.html" title="This class handles the construction and drawing of the static circles on the screen. " alt="" coords="158,366,265,458"/>
+<area shape="rect" id="node5" href="$class_static_line.html" title="This class handles the construction and drawing of the static lines on the screen. " alt="" coords="291,366,389,458"/>
+<area shape="rect" id="node3" href="$class_dynamic_circle.html" title="This class handles the construction and drawing of the dynaimc circles on the screen. " alt="" coords="7,507,131,599"/>
+</map>

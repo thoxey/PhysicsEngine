@@ -1,0 +1,4 @@
+<map id="staticcircle.h" name="staticcircle.h">
+<area shape="rect" id="node2" href="$main_8cpp.html" title="Contains the main game loop, all the code for the SDl window, this is the main body of the program..." alt="" coords="5,80,80,107"/>
+<area shape="rect" id="node3" href="$staticcircle_8cpp.html" title="This class handles the construction and drawing of the static circles on the screen. " alt="" coords="105,80,212,107"/>
+</map>

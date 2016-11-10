@@ -17,6 +17,14 @@ var files =
     [ "staticcircle.h", "staticcircle_8h.html", [
       [ "StaticCircle", "class_static_circle.html", "class_static_circle" ]
     ] ],
+    [ "staticline.cpp", "staticline_8cpp.html", null ],
+    [ "staticline.h", "staticline_8h.html", [
+      [ "StaticLine", "class_static_line.html", "class_static_line" ]
+    ] ],
+    [ "vector2d.cpp", "vector2d_8cpp.html", null ],
+    [ "vector2d.h", "vector2d_8h.html", [
+      [ "Vector2d", "class_vector2d.html", "class_vector2d" ]
+    ] ],
     [ "world.cpp", "world_8cpp.html", "world_8cpp" ],
     [ "world.h", "world_8h.html", [
       [ "World", "class_world.html", "class_world" ]

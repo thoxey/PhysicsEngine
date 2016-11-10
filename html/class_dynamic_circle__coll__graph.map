@@ -1,0 +1,4 @@
+<map id="DynamicCircle" name="DynamicCircle">
+<area shape="rect" id="node2" href="$class_dynamic_object.html" title="This class sets any children to be dynamic. " alt="" coords="5,365,133,443"/>
+<area shape="rect" id="node3" href="$class_game_object.html" title="This is the parent class for all the possible objects, static objects inherit directly from this..." alt="" coords="12,5,127,317"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="World::updateObjectsVel" name="World::updateObjectsVel">
+<area shape="rect" id="node2" href="$class_world.html#a15c8ca55c7382acd728b97a42da1634b" title="World::calcVelX This calculates the X velocity, and keeps it in the x bounds. " alt="" coords="241,5,353,32"/>
+<area shape="rect" id="node3" href="$class_world.html#acd055efb15d8312f0efc0c299f2aa800" title="World::calcVelY This calculates the Y velocity, and keeps it in the y bounds (with room for buttons a..." alt="" coords="241,56,353,83"/>
+<area shape="rect" id="node4" href="$class_world.html#ab489f97a29330f8343b45c69c73b96b0" title="World::collisionDetection Detects whether two objects are colliding, then calls the reaction if they ..." alt="" coords="216,107,379,133"/>
+<area shape="rect" id="node5" href="$class_world.html#aaa454be8e22ab328410f06bd3eb8a834" title="Wolrd::reaction This applies the reaction forces to the shapes. " alt="" coords="427,107,533,133"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_game_object.html" title="This is the parent class for all the possible objects, static objects inherit directly from this..." alt="" coords="6,56,101,83"/>
+<area shape="rect" id="node2" href="$class_dynamic_object.html" title="This class sets any children to be dynamic. " alt="" coords="150,5,261,32"/>
+<area shape="rect" id="node4" href="$class_static_circle.html" title="This class handles the construction and drawing of the static circles on the screen. " alt="" coords="161,56,250,83"/>
+<area shape="rect" id="node5" href="$class_static_line.html" title="This class handles the construction and drawing of the static lines on the screen. " alt="" coords="165,107,245,133"/>
+<area shape="rect" id="node3" href="$class_dynamic_circle.html" title="This class handles the construction and drawing of the dynaimc circles on the screen. " alt="" coords="310,5,415,32"/>
+</map>

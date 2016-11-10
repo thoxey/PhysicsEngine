@@ -8,6 +8,7 @@
 #include "staticcircle.h"
 #include "staticline.h"
 #include "button.h"
+
 #define WINDOW_TITLE "Rigid Body Simlation"
 //--------------------------------------------------------------------------------------------------------------------------------------------
 World *scene = NULL;
@@ -59,7 +60,9 @@ Uint32 timerCallback(Uint32 interval, void *)
     return interval;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-int main() {
+int main()
+{
+
     if( initSDL() == EXIT_FAILURE )
         return EXIT_FAILURE;
     gContext = SDL_GL_CreateContext( gWindow );

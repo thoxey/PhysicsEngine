@@ -7,27 +7,30 @@ CONFIG -= app_bundle
 OBJECTS_DIR = obj
 
 QMAKE_CXXFLAGS += $$system(sdl2-config --cflags)
+QMAKE_CXXFLAGS += -Wall
 
 SOURCES += src/main.cpp \
-    src/world.cpp \
-    src/gameobject.cpp \
-    src/staticcircle.cpp \
-    src/dynamicobject.cpp \
-    src/dynamiccircle.cpp \
-    src/button.cpp \
-    src/staticline.cpp \
-    src/vector2d.cpp
+           src/world.cpp \
+           src/gameobject.cpp \
+           src/staticcircle.cpp \
+           src/dynamicobject.cpp \
+           src/dynamiccircle.cpp \
+           src/button.cpp \
+           src/staticline.cpp \
+           src/vector2d.cpp \
 
 
-HEADERS += \
-    src/world.h \
-    src/gameobject.h \
-    src/staticcircle.h \
-    src/dynamicobject.h \
-    src/dynamiccircle.h \
-    src/button.h \
-    src/staticline.h \
-    src/vector2d.h
+
+HEADERS +=  src/world.h \
+            src/gameobject.h \
+            src/staticcircle.h \
+            src/dynamicobject.h \
+            src/dynamiccircle.h \
+            src/button.h \
+            src/staticline.h \
+            src/vector2d.h \
+
+
 
 linux: {
   LIBS += $$system(sdl2-config --libs)

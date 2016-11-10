@@ -1,0 +1,4 @@
+<map id="button.h" name="button.h">
+<area shape="rect" id="node2" href="$button_8cpp.html" title="This class handles the buttons at the top of the screen, it stores thier positions, handles the texturing and the mouse coordinate conversion. " alt="" coords="5,80,88,107"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Contains the main game loop, all the code for the SDl window, this is the main body of the program..." alt="" coords="112,80,187,107"/>
+</map>
