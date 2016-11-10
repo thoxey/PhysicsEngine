@@ -1,6 +1,0 @@
-digraph "World"
-{
-  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
-  node [fontname="FreeSans",fontsize="10",shape=record];
-  Node1 [label="{World\n|+ m_masterList\l+ m_xray\l+ m_gravOn\l+ m_shapeSwitch\l+ m_calcs\l+ m_shapeSize\l+ m_startTime\l+ m_elapsedTime\l- m_isInit\l|+ World()\l+ ~World()\l+ init()\l+ resize()\l+ draw()\l+ updateObjectsPos()\l+ updateObjectsVel()\l- collisionDetection()\l- calcVelX()\l- calcVelY()\l- reaction()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-}
