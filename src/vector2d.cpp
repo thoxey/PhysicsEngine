@@ -43,3 +43,11 @@ bool Vector2d::operator <  (Vector2d _v)
 {
     return ((m_x == _v.m_x)<(m_y == _v.m_y));
 }
+double Vector2d::mag()
+{
+  return sqrt((m_x*m_x)+(m_y*m_y));
+}
+double Vector2d::dot(Vector2d &_RHS)
+{
+  return (m_x*_RHS.m_x)+(m_y*_RHS.m_y);
+}

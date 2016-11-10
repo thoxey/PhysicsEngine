@@ -1,6 +1,6 @@
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
-
+#include <cmath>
 
 class Vector2d
 {
@@ -19,6 +19,8 @@ public:
     bool operator <= (Vector2d _v);
     bool operator >  (Vector2d _v);
     bool operator <  (Vector2d _v);
+    double mag();
+    double dot(Vector2d &_RHS);
 
 };
 

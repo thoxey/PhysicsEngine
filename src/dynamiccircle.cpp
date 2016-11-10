@@ -7,8 +7,8 @@ DynamicCircle::DynamicCircle(float _posX, float _posY, int _radMod)
     m_radMod = _radMod;
     m_posX = _posX;
     m_posY = _posY;
-    m_radius = rand() % _radMod + _radMod;
-    m_radius /= 100;
+    //m_radius = rand() % _radMod + _radMod;
+    //m_radius /= 100;
     m_mass = (m_radius*m_radius);
     m_col =  rand() % 10;
     m_col /= 10;

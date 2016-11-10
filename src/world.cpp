@@ -53,14 +53,14 @@ void World::collisionDetection()
                 double dX = m_masterList[i]->m_posX - m_masterList[j]->m_posX;
                 double dY = m_masterList[i]->m_posY - m_masterList[j]->m_posY;
                 double sumOfRads = m_masterList[i]->m_radius + m_masterList[j]->m_radius;  //Note to self:DONT change these to floats again, it will break it... again
+                                                                                           //Note to Note to self: These floats are doubles
                 double massRatI = m_masterList[i]->m_mass/(m_masterList[i]->m_mass+m_masterList[j]->m_mass);
                 double massRatJ = 1-massRatI; //Should be m_masterList[j]->m_mass/(m_masterList[i]->m_mass+m_masterList[j]->m_mass) but faster this way
                 double sumOfSquares = sqrt((dX*dX)+(dY*dY));
-                double hyp = asin(dY/sumOfSquares)*(sumOfRads-sumOfSquares);
-                if(hyp == 0)
-                    hyp = 0.001; //Just in case
+                double hyp = asin(dY/sumOfSquares)*(sumOfRads-sumOfSquares);//Provides direction of reaction
                 if(sumOfRads > sumOfSquares)
                 {
+                    m_masterList[j]->m_isColliding = true;
                     if(m_masterList[i]->m_isDynamic)
                     {
                         reaction(i, hyp, massRatI, dX, dY);
@@ -76,16 +76,32 @@ void World::collisionDetection()
                 }
             }
             //WORK IN PROGRESS
-//            else if(m_masterList[i]->m_isCircle && !m_masterList[j]->m_isCircle)
-//            {
-//                float circleX = m_masterList[i]->m_posX;
-//                float lineX1 = m_masterList[j]->m_posX;
-//                float lineX2 = m_masterList[j]->m_posX2;
-//                float lineY1 = m_masterList[j]->m_posY;
-//                float lineY2 = m_masterList[j]->m_posY2;
-//                float lineVec1 = lineX1-lineY1;
-//                float lineVec2 = lineX2-lineY2;
-//            }
+            else if(m_masterList[i]->m_isCircle && m_masterList[j]->m_isCircle == false)
+            {
+                double circleX = m_masterList[i]->m_posX;
+                double circleY = m_masterList[i]->m_posY;
+                double lineX1 = m_masterList[j]->m_posX;
+                double lineX2 = m_masterList[j]->m_posX2;
+                double lineY1 = m_masterList[j]->m_posY;
+                double lineY2 = m_masterList[j]->m_posY2;
+                //double linedX = lineX2-lineX1;
+                //double linedY = lineY2-lineY1;
+                Vector2d p1c = Vector2d(circleX-lineX1, circleY-lineY1);
+                Vector2d normalVec = Vector2d(p1c.m_y, -p1c.m_x);
+                double dist = normalVec.mag();
+                //double dist = p1c.dot(normalVec);
+
+                if(std::abs(dist) < m_masterList[i]->m_radius)
+                  {
+                    std::cerr<<"Line Circle Collision Occurring\n";
+                    std::cerr<<"rad: "<<m_masterList[i]->m_radius<<"\n";
+                    std::cerr<<"dist: "<<std::abs(dist)<<"\n-------------------------\n";
+
+                    //m_masterList[i]->m_posX = ;
+                    //m_masterList[i]->m_posY;
+                  }
+
+            }
         }
     }
 }
@@ -156,7 +172,6 @@ void World::updateObjectsPos()
 //--------------------------------------------------------------------------------------------------------------------------------------------
 void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _dY)
 {
-    m_masterList[_i]->m_isColliding = true;
     m_masterList[_i]->m_posX += _dX*DAMPNER; //Stops overlap being possible
     m_masterList[_i]->m_velX += _hyp*_massRat;
     m_masterList[_i]->m_velX *= _hyp*_massRat*m_masterList[_i]->m_bounce; //Removing _hyp*_massRat cripples performance, confusing
