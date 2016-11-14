@@ -92,6 +92,7 @@ int main()
       while( SDL_PollEvent( &e ) != 0 )
         {
           GameObject *newShape;
+          int x, y;
           // The window has been resized
           if ((e.type == SDL_WINDOWEVENT) &&
               (e.window.event == SDL_WINDOWEVENT_RESIZED)) {
@@ -107,6 +108,7 @@ int main()
 
               switch (e.key.keysym.sym)
                 {
+
                 // if we have an escape quit
                 case SDLK_ESCAPE : quit=1; break;
                 case SDLK_g :
@@ -133,14 +135,12 @@ int main()
                   };break;
                 case SDLK_v :
                   {
-                    int x , y;
                     SDL_GetMouseState( &x, &y );
                     newShape = new StaticCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                     scene->m_masterList.push_back(newShape);
                   };break;
                 case SDLK_c :
                   {
-                    int x , y;
                     SDL_GetMouseState( &x, &y );
                     newShape = new DynamicCircle(gui->convertPixCoorX(x), gui->convertPixCoorY(y), scene->m_shapeSize);
                     scene->m_masterList.push_back(newShape);
@@ -168,24 +168,16 @@ int main()
                   };break;
                 case SDLK_l :
                   {
-
-                    int x , y;
                     SDL_GetMouseState( &x, &y );
-                    if(doneDrawingLine)
-                      {
-                        newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x), gui->convertPixCoorY(y));
-                        scene->m_masterList.push_back(newShape);
-                      }
-                    doneDrawingLine = false;
                   };break;
                 }
             }
           else if(e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_l)
             {
-              int x , y;
-              SDL_GetMouseState( &x, &y );
-              scene->m_masterList[scene->m_masterList.size()-1]->setPos2(gui->convertPixCoorX(x), gui->convertPixCoorY(y));
-              doneDrawingLine = true;
+              int x2 , y2;
+              SDL_GetMouseState( &x2, &y2 );
+              newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x2), gui->convertPixCoorY(y2));
+              scene->m_masterList.push_back(newShape);
             }
           else if(e.type == SDL_MOUSEBUTTONDOWN )
             {

@@ -33,7 +33,7 @@ public:
     /// @brief GameObject::draw The draw for GameObject is pure virtual as it cannot be drawn
     virtual void draw(bool _xray) = 0;
     ///@brief GameObject::setPos2 Sets the second position for a line
-    void setPos2(float _x2, float _y2);
+    void setPos2(double _x2, double _y2);
     /// @brief m_posY         is the Y position of the object in the -1 to 1 range
     double m_posY      = 0;
     /// @brief m_posX         is the X position of the object in the -1 to 1 range

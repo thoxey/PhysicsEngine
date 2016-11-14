@@ -12,7 +12,7 @@ void GameObject::draw(bool _xray)
         return;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-void GameObject::setPos2(float _x2, float _y2)
+void GameObject::setPos2(double _x2, double _y2)
 {
     m_posX2 = _x2;
     m_posY2 = _y2;

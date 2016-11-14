@@ -76,7 +76,7 @@ void World::collisionDetection()
                 }
             }
             //WORK IN PROGRESS
-            else if(m_masterList[i]->m_isCircle && m_masterList[j]->m_isCircle == false)
+            else if(m_masterList[i]->m_isCircle == true && m_masterList[j]->m_isCircle == false)
             {
                 double circleX = m_masterList[i]->m_posX;
                 double circleY = m_masterList[i]->m_posY;
@@ -84,18 +84,18 @@ void World::collisionDetection()
                 double lineX2 = m_masterList[j]->m_posX2;
                 double lineY1 = m_masterList[j]->m_posY;
                 double lineY2 = m_masterList[j]->m_posY2;
-                //double linedX = lineX2-lineX1;
-                //double linedY = lineY2-lineY1;
+                Vector2d lineVec = Vector2d(lineX2-lineX1, lineY2-lineY1);
                 Vector2d p1c = Vector2d(circleX-lineX1, circleY-lineY1);
-                Vector2d normalVec = Vector2d(p1c.m_y, -p1c.m_x);
-                double dist = normalVec.mag();
-                //double dist = p1c.dot(normalVec);
-
+                Vector2d normalVec = Vector2d(lineVec.m_y, -lineVec.m_x);
+                //double dist = normalVec.mag();
+                double dist = p1c.dot(normalVec);
                 if(std::abs(dist) < m_masterList[i]->m_radius)
                   {
                     std::cerr<<"Line Circle Collision Occurring\n";
                     std::cerr<<"rad: "<<m_masterList[i]->m_radius<<"\n";
-                    std::cerr<<"dist: "<<std::abs(dist)<<"\n-------------------------\n";
+                    std::cerr<<"LineY1: "<<lineY1<<" LineY2: "<<lineY2<<"\n";
+                    std::cerr<<"NormalX: "<<normalVec.m_x<<" NormalY: "<<normalVec.m_y<<"\n";
+                    std::cerr<<"dist: "<<dist<<"\n-------------------------\n";
 
                     //m_masterList[i]->m_posX = ;
                     //m_masterList[i]->m_posY;
