@@ -18,7 +18,7 @@ void StaticLine::draw(bool _xray)
       glLineWidth(3.0);
       glBegin(GL_LINES);
 
-      glColor3f(1.0f, 0.0f, 0.0f);
+      glColor3f(0.2f, 0.5f, 0.8f);
       glVertex2f(m_posX, m_posY);
       glVertex2f(m_posX2, m_posY2);
       glEnd();
@@ -28,7 +28,7 @@ void StaticLine::draw(bool _xray)
       glLineWidth(1.0);
       glBegin(GL_LINES);
 
-      glColor3f(1.0f, 0.0f, 0.0f);
+      glColor3f(0.2f, 0.5f, 0.8f);
       glVertex2f(m_posX, m_posY);
       glVertex2f(m_posX2, m_posY2);
       glEnd();

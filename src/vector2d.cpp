@@ -17,9 +17,9 @@ Vector2d Vector2d::operator - (Vector2d _v)
 {
     return Vector2d(m_x-_v.m_x, m_y-_v.m_y);
 }
-Vector2d Vector2d::operator / (Vector2d _v)
+Vector2d Vector2d::operator / (double _s)
 {
-    return Vector2d(m_x/_v.m_x, m_y/_v.m_y);
+    return Vector2d(m_x/_s, m_y/_s);
 }
 bool Vector2d::operator == (Vector2d _v)
 {

@@ -37,8 +37,6 @@ public:
     bool m_xray = true;
     /// @brief m_gravOn                 This bool allows for turning gravity on and off
     bool m_gravOn = true;
-    /// @brief m_shapeSwitch            This changes which shape is created on the left click or space bar
-    bool m_shapeSwitch = true;
     /// @brief m_calcs                  This is how many times the objects are updated before drawing
     int m_calcs = 5;
     /// @brief m_shapeSize              This is changes the GameObject.m_radMod during runtime via the arrow keys or UI

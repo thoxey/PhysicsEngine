@@ -50,7 +50,6 @@ Uint32 timerCallback(Uint32 interval, void *)
           scene->m_startTime += 0.001;
           scene->updateObjectsVel();
           scene->updateObjectsPos();
-
         }
 
 
@@ -84,7 +83,6 @@ int main()
   SDL_Event e;
   //Enable text input
   SDL_StartTextInput();
-  bool doneDrawingLine = true; //quick fix, change at some point! <<<<<<<<<<<<<<<<
   //While application is running
   while(!quit)
     {
@@ -95,12 +93,14 @@ int main()
           int x, y;
           // The window has been resized
           if ((e.type == SDL_WINDOWEVENT) &&
-              (e.window.event == SDL_WINDOWEVENT_RESIZED)) {
+              (e.window.event == SDL_WINDOWEVENT_RESIZED))
+            {
               SDL_SetWindowSize(gWindow, e.window.data1, e.window.data2);
               scene->resize(e.window.data1, e.window.data2);
             }
           //User requests quit
-          else if( e.type == SDL_QUIT ) {
+          else if( e.type == SDL_QUIT )
+            {
               quit = true;
             }
           else if(e.type == SDL_KEYDOWN)
@@ -147,7 +147,7 @@ int main()
                   };break;
                 case SDLK_q :
                   {
-                    std::cout<<scene->m_masterList.size()<<std::endl;
+                    std::cerr<<scene->m_masterList.size()<<"\n";
                   };break;
                 case SDLK_k :
                   {
@@ -155,7 +155,8 @@ int main()
                   };break;
                 case SDLK_u:
                   {
-                    scene->m_masterList.pop_back();
+                    if(scene->m_masterList.size()>0)
+                      scene->m_masterList.pop_back();
                   };
                 case SDLK_UP :
                   {
@@ -170,6 +171,11 @@ int main()
                   {
                     SDL_GetMouseState( &x, &y );
                   };break;
+                case SDLK_SPACE :
+                  {
+                    SDL_GetMouseState( &x, &y );
+                    std::cerr<<"mouseX: "<<gui->convertPixCoorX(x)<<"mouseY: "<< gui->convertPixCoorY(y)<<"\n";
+                  }break;
                 }
             }
           else if(e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_l)
@@ -227,8 +233,6 @@ int main()
                 }
             }
         }
-
-
       //Render the scene
       scene->draw();
       //scene->updateObjects();

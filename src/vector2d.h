@@ -12,7 +12,7 @@ public:
     Vector2d operator * (double _scalar);
     Vector2d operator + (Vector2d _v);
     Vector2d operator - (Vector2d _v);
-    Vector2d operator / (Vector2d _v);
+    Vector2d operator / (double _s);
     //--------------------------------------------------------------------------------------------------------------------------------------------
     bool operator == (Vector2d _v);
     bool operator >= (Vector2d _v);
