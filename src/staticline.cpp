@@ -20,6 +20,7 @@ void StaticLine::draw(bool _xray)
 
       glColor3f(0.2f, 0.5f, 0.8f);
       glVertex2f(m_posX, m_posY);
+      glColor3f(0.0f, 0.5f, 0.2f);
       glVertex2f(m_posX2, m_posY2);
       glEnd();
     }

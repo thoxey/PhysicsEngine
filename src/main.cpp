@@ -182,7 +182,7 @@ int main()
             {
               int x2 , y2;
               SDL_GetMouseState( &x2, &y2 );
-              newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x2), gui->convertPixCoorY(y/*2*/));
+              newShape = new StaticLine(gui->convertPixCoorX(x), gui->convertPixCoorY(y), gui->convertPixCoorX(x2), gui->convertPixCoorY(y2));
               scene->m_masterList.push_back(newShape);
             }
           else if(e.type == SDL_MOUSEBUTTONDOWN )
