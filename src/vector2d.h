@@ -13,6 +13,7 @@ public:
     Vector2d operator + (Vector2d _v);
     Vector2d operator - (Vector2d _v);
     Vector2d operator / (double _s);
+    double operator ^ (Vector2d _v);
     //--------------------------------------------------------------------------------------------------------------------------------------------
     bool operator == (Vector2d _v);
     bool operator >= (Vector2d _v);

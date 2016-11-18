@@ -60,6 +60,7 @@ private:
     /// @param _dX                          The distance between the centres of the shapes on the x axis
     /// @param _dX                          The distance between the centres of the shapes on the y axis
     void reaction(int _i, double _hyp, double _massRat, double _dX, double _dY);
+    void roll(GameObject _circ, Vector2d _normalVec);
     ///@brief m_isInit                     Used for a sanity check, making sure the world is initialised before continuing
     bool m_isInit;
 
