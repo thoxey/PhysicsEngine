@@ -78,14 +78,31 @@ void World::collisionDetection()
           //WORK IN PROGRESS
           else if(m_masterList[i]->m_isCircle != m_masterList[j]->m_isCircle)
             {
-              //--------------Assigning easier names-----------------
-              double circleX = m_masterList[i]->m_posX;
-              double circleY = m_masterList[i]->m_posY;
-              double lineX1  = m_masterList[j]->m_posX;
-              double lineX2  = m_masterList[j]->m_posX2;
-              double lineY1  = m_masterList[j]->m_posY;
-              double lineY2  = m_masterList[j]->m_posY2;
-              //----------------------------------------------------
+              double circleX,circleY,radius,lineX1,lineX2,lineY1,lineY2;
+              if(m_masterList[i]->m_isCircle && !m_masterList[j]->m_isCircle)
+                {
+                  //--------------Assigning easier names-----------------
+                  circleX = m_masterList[i]->m_posX;
+                  circleY = m_masterList[i]->m_posY;
+                  radius  = m_masterList[i]->m_radius;
+                  lineX1  = m_masterList[j]->m_posX;
+                  lineX2  = m_masterList[j]->m_posX2;
+                  lineY1  = m_masterList[j]->m_posY;
+                  lineY2  = m_masterList[j]->m_posY2;
+                  //----------------------------------------------------
+                }
+              else if(!m_masterList[i]->m_isCircle && m_masterList[j]->m_isCircle)
+                {
+                  //--------------Assigning easier names-----------------
+                  circleX = m_masterList[j]->m_posX;
+                  circleY = m_masterList[j]->m_posY;
+                  radius  = m_masterList[j]->m_radius;
+                  lineX1  = m_masterList[i]->m_posX;
+                  lineX2  = m_masterList[i]->m_posX2;
+                  lineY1  = m_masterList[i]->m_posY;
+                  lineY2  = m_masterList[i]->m_posY2;
+                  //----------------------------------------------------
+                }
               Vector2d lineVec      =  Vector2d(lineX2-lineX1, lineY2-lineY1);
               Vector2d p1c          =  Vector2d(circleX-lineX1, circleY-lineY1);
               Vector2d lineVecUnit  =  lineVec/lineVec.mag();
@@ -105,8 +122,9 @@ void World::collisionDetection()
                 }
               //Vector2d normalVec   = Vector2d(lineVec.m_y, -lineVec.m_x);
               //double dist = p1c.dot(normalVec);
+
               Vector2d distV = Vector2d(circleX-closeX, circleY-closeY);
-              if(distV.mag()<m_masterList[i]->m_radius)//if(std::abs(dist) < m_masterList[i]->m_radius)
+              if(distV.mag()<radius)//if(std::abs(dist) < m_masterList[i]->m_radius)
                 {
                   std::cerr<<"Line Circle Collision Occurring\n";
                   std::cerr<<"rad: "<<m_masterList[i]->m_radius<<"\n";
