@@ -106,12 +106,12 @@ void World::collisionDetection()
               Vector2d projV        =  lineVecUnit*projVLen;
               double closeX         =  lineX1+projV.m_x;
               double closeY         =  lineY1+projV.m_y;
-              if(projV.mag()<0)
+              if(projV.dot(lineVecUnit) <= 0)
                 {
                   closeX     =  lineX1;
                   closeY     =  lineY1;
                 }
-              else if(projV.mag()>lineVec.mag())
+              else if(projV.dot(lineVecUnit)>lineVec.mag())
                 {
                   closeX     =  lineX2;
                   closeY     =  lineY2;
