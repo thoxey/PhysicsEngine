@@ -208,7 +208,4 @@ void World::reaction(int _i, double _hyp, double _massRat, double _dX, double _d
     m_masterList[_i]->m_velY *= _hyp*_massRat*m_masterList[_i]->m_bounce;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
-void World::roll(GameObject _circ, Vector2d _normalVec)
-{
-    //Coming soon...
-}
+
