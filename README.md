@@ -1,5 +1,8 @@
 # PhysicsEngine
 
+
+This was my first decent sized C++ project, so the code reflects that
+
 A basic rigid body simulation, originally submitted as a coursework assignment for uni, now working on for fun.
 Feel free to download the project and try it out, requires th following libraries:  
 -OpenGl  
